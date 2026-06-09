@@ -1,0 +1,212 @@
+options:
+  parameters:
+    author: guang
+    catch_exceptions: 'True'
+    category: '[Dong]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Low-rate raw IQ receiver for Chime-style chirp sounding
+    gen_cmake: 'Off'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: chime_wideband_rx
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Chime Wideband RX
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '2000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 24]
+    rotation: 0
+    state: enabled
+- name: center_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '487700000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 24]
+    rotation: 0
+    state: enabled
+- name: rf_bandwidth
+  id: variable
+  parameters:
+    comment: ''
+    value: '2000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 24]
+    rotation: 0
+    state: enabled
+- name: rx_gain_db
+  id: variable
+  parameters:
+    comment: Absolute B210 RX gain in dB.
+    value: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 24]
+    rotation: 0
+    state: enabled
+- name: rx_device_addr
+  id: variable
+  parameters:
+    comment: Change this if the RX USRP is the other radio.
+    value: '"serial=2603160"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 120]
+    rotation: 0
+    state: enabled
+- name: capture_seconds
+  id: variable
+  parameters:
+    comment: 2 Msps fc32 is about 16 MB/s. Increase sample rate only after this test is stable.
+    value: '10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 120]
+    rotation: 0
+    state: enabled
+- name: capture_samples
+  id: variable
+  parameters:
+    comment: ''
+    value: int(samp_rate * capture_seconds)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 120]
+    rotation: 0
+    state: enabled
+- name: output_file
+  id: variable
+  parameters:
+    comment: GNU Radio complex64/fc32 IQ output.
+    value: r"dong\outputs\captures\chime_test_rx_fc32.bin"
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 216]
+    rotation: 0
+    state: enabled
+- name: uhd_usrp_source_0
+  id: uhd_usrp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    ant0: '"TX/RX"'
+    bw0: rf_bandwidth
+    center_freq0: center_freq
+    clock_rate: 0e0
+    clock_source0: internal
+    comment: ''
+    dc_offs0: 0+0j
+    dc_offs_enb0: default
+    dev_addr: rx_device_addr
+    dev_args: '""'
+    gain0: rx_gain_db
+    gain_type0: default
+    iq_imbal0: 0+0j
+    iq_imbal_enb0: default
+    lo_export0: 'False'
+    lo_source0: internal
+    nchan: '1'
+    num_mboards: '1'
+    otw: sc16
+    rx_agc0: Disabled
+    samp_rate: samp_rate
+    show_lo_controls: 'False'
+    start_time: '-1.0'
+    stream_args: '""'
+    stream_chans: '[]'
+    sync: pc_clock
+    time_source0: ''
+    type: fc32
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 360]
+    rotation: 0
+    state: enabled
+- name: blocks_head_0
+  id: blocks_head
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    num_items: capture_samples
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 384]
+    rotation: 0
+    state: enabled
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    append: 'False'
+    comment: Buffered file sink. Keep unbuffered off for high-rate capture.
+    file: output_file
+    type: complex
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 384]
+    rotation: 0
+    state: enabled
+
+connections:
+- [uhd_usrp_source_0, '0', blocks_head_0, '0']
+- [blocks_head_0, '0', blocks_file_sink_0, '0']
+
+metadata:
+  file_format: 1
