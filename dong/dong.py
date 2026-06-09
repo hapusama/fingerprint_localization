@@ -72,7 +72,7 @@ class dong(gr.top_block, Qt.QWidget):
         self.EXPID = EXPID = r"\2_0_53_11_2_16"
         self.samp_time = samp_time = int(samp_rate*1)
         self.NOP = NOP = int(samp_rate*1)
-        self.IQ_Root = IQ_Root = str(output_dir) + EXPID
+        self.IQ_Root = IQ_Root = str(output_dir / EXPID.lstrip("\\/"))
         self.CF = CF = 487700000
         self.BW = BW = 125000
 
@@ -180,7 +180,7 @@ class dong(gr.top_block, Qt.QWidget):
 
     def set_EXPID(self, EXPID):
         self.EXPID = EXPID
-        self.set_IQ_Root(str(self.output_dir) + self.EXPID)
+        self.set_IQ_Root(str(self.output_dir / self.EXPID.lstrip("\\/")))
 
     def get_samp_time(self):
         return self.samp_time

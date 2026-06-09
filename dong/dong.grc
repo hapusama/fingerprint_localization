@@ -73,7 +73,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: r"dong\outputs\captures" + EXPID
+    value: r"D:\Desktop\fingerprint_localization\dong\outputs\captures" + EXPID
   states:
     bus_sink: false
     bus_source: false

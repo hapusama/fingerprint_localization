@@ -121,7 +121,7 @@ blocks:
   id: variable
   parameters:
     comment: Output is GNU Radio complex64/fc32 IQ.
-    value: r"dong\outputs\captures\stable_capture_fc32.bin"
+    value: r"D:\Desktop\fingerprint_localization\dong\outputs\captures\stable_capture_fc32.bin"
   states:
     bus_sink: false
     bus_source: false

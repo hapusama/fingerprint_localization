@@ -41,11 +41,12 @@ class dong_capture_stable(gr.top_block):
         self.capture_seconds = capture_seconds = 5
         self.rx_gain = rx_gain = 0.6
         self.rf_bandwidth = rf_bandwidth = 10000000
-        self.output_file = output_file = str(dong_root / "outputs" / "captures" / "stable_capture_fc32.bin")
+        self.output_dir = output_dir = dong_root / "outputs" / "captures"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        self.output_file = output_file = str(output_dir / "stable_capture_fc32.bin")
         self.device_addr = device_addr = ""
         self.center_freq = center_freq = 487700000
         self.capture_samples = capture_samples = int(samp_rate * capture_seconds)
-        Path(output_file).parent.mkdir(parents=True, exist_ok=True)
 
         ##################################################
         # Blocks

@@ -15,6 +15,11 @@ from PIL import Image, ImageDraw, ImageFont
 from waveforms import correlation_channel_estimate
 
 
+DONG_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT = DONG_ROOT / "outputs" / "multipath" / "sweep_capture.npz"
+DEFAULT_OUTPUT_DIR = DONG_ROOT / "outputs" / "multipath" / "sweep_analysis"
+
+
 def db20(x: np.ndarray) -> np.ndarray:
     return 20.0 * np.log10(np.maximum(np.asarray(x), 1e-15))
 
@@ -143,9 +148,9 @@ def simple_plot(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Estimate channel response and synthetic CIR from a sweep npz")
-    parser.add_argument("--input", required=True, help="Measurement .npz from capture_sweep.py")
+    parser.add_argument("--input", default=str(DEFAULT_INPUT), help="Measurement .npz from capture_sweep.py")
     parser.add_argument("--calibration", help="Optional loopback calibration .npz")
-    parser.add_argument("--output-dir", required=True, help="Directory for CSV/PNG/summary outputs")
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for CSV/PNG/summary outputs")
     parser.add_argument("--nfft", type=int, default=0, help="CIR IFFT length. 0 chooses automatically")
     parser.add_argument("--max-delay-us", type=float, default=8.0, help="PDP plot delay window around 0 in us")
     args = parser.parse_args()

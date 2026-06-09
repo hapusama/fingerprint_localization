@@ -15,11 +15,15 @@ from gnuradio import blocks, gr, uhd
 from waveforms import make_chirp_probe
 
 
+DONG_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_OUTPUT = DONG_ROOT / "outputs" / "multipath" / "sweep_capture.npz"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Sweep a B200/B210 over many narrow channels and save IQ captures."
     )
-    parser.add_argument("--output", required=True, help="Output .npz file")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Output .npz file")
     parser.add_argument("--device-args", default="", help='UHD device args. Leave empty for auto, e.g. "serial=2512552"')
     parser.add_argument("--rx-antenna", default="TX/RX", choices=["TX/RX", "RX2"])
     parser.add_argument("--tx-antenna", default="TX/RX")
@@ -180,4 +184,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
