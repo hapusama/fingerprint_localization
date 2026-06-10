@@ -11,7 +11,6 @@
 # GNU Radio version: 3.10.12.0
 
 from gnuradio import blocks
-import pmt
 from gnuradio import gr
 from gnuradio.filter import firdes
 from gnuradio.fft import window
@@ -37,9 +36,9 @@ class chime_wideband_tx(gr.top_block):
         # Variables
         ##################################################
         self.waveform_file = waveform_file = r"D:\Desktop\fingerprint_localization\dong\inputs\chime_test_tx_period_fc32.bin"
-        self.tx_seconds = tx_seconds = 20
+        self.tx_seconds = tx_seconds = 50
         self.tx_gain_db = tx_gain_db = 100
-        self.tx_device_addr = tx_device_addr = "serial=2512552"
+        self.tx_device_addr = tx_device_addr = "serial=2512552,num_send_frames=1024"
         self.samp_rate = samp_rate = 20000000
         self.rf_bandwidth = rf_bandwidth = 20000000
         self.center_freq = center_freq = 487700000
@@ -66,16 +65,15 @@ class chime_wideband_tx(gr.top_block):
         self.uhd_usrp_sink_0.set_antenna("TX/RX", 0)
         self.uhd_usrp_sink_0.set_bandwidth(rf_bandwidth, 0)
         self.uhd_usrp_sink_0.set_gain(tx_gain_db, 0)
+        self.blocks_vector_source_x_0 = blocks.vector_source_c(__import__('numpy').fromfile(waveform_file, dtype=__import__('numpy').complex64), True, 1, [])
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, (int(samp_rate * tx_seconds)))
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, waveform_file, True, 0, 0)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
         self.connect((self.blocks_head_0, 0), (self.uhd_usrp_sink_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_head_0, 0))
 
 
     def get_waveform_file(self):
@@ -83,7 +81,7 @@ class chime_wideband_tx(gr.top_block):
 
     def set_waveform_file(self, waveform_file):
         self.waveform_file = waveform_file
-        self.blocks_file_source_0.open(self.waveform_file, True)
+        self.blocks_vector_source_x_0.set_data(__import__('numpy').fromfile(self.waveform_file, dtype=__import__('numpy').complex64), [])
 
     def get_tx_seconds(self):
         return self.tx_seconds

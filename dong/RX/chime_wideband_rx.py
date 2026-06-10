@@ -38,7 +38,7 @@ class chime_wideband_rx(gr.top_block):
         self.samp_rate = samp_rate = 20000000
         self.capture_seconds = capture_seconds = 10
         self.rx_gain_db = rx_gain_db = 20
-        self.rx_device_addr = rx_device_addr = "serial=2603160"
+        self.rx_device_addr = rx_device_addr = "serial=2603160,num_recv_frames=512"
         self.rf_bandwidth = rf_bandwidth = 20000000
         self.output_file = output_file = r"D:\Desktop\fingerprint_localization\dong\outputs\captures\chime_test_rx_fc32.bin"
         self.center_freq = center_freq = 487700000

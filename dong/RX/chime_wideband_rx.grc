@@ -96,8 +96,9 @@ blocks:
 - name: rx_device_addr
   id: variable
   parameters:
-    comment: Change this if the RX USRP is the other radio.
-    value: '"serial=2603160"'
+    comment: Change this if the RX USRP is the other radio. Extra UHD receive
+      frames help absorb host scheduling jitter at 20 MS/s.
+    value: '"serial=2603160,num_recv_frames=512"'
   states:
     bus_sink: false
     bus_source: false
