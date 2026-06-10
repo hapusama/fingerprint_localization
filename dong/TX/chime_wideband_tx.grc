@@ -10,7 +10,7 @@ options:
       waveform file
     gen_cmake: 'Off'
     gen_linking: dynamic
-    generate_options: qt_gui
+    generate_options: no_gui
     hier_block_src_path: '.:'
     id: chime_wideband_tx
     max_nouts: '0'
@@ -50,19 +50,19 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '2000000'
+    value: '20000000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 24]
+    coordinate: [536, 28.0]
     rotation: 0
     state: enabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: '2000000'
+    value: '20000000'
   states:
     bus_sink: false
     bus_source: false
@@ -79,7 +79,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 120]
+    coordinate: [48, 108.0]
     rotation: 0
     state: enabled
 - name: tx_gain_db
@@ -91,26 +91,15 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 24]
-    rotation: 0
-    state: enabled
-- name: tx_samples
-  id: variable
-  parameters:
-    comment: ''
-    value: int(samp_rate * tx_seconds)
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [184, 216]
+    coordinate: [720, 28.0]
     rotation: 0
     state: enabled
 - name: tx_seconds
   id: variable
   parameters:
-    comment: Flowgraph stops after this many seconds.
-    value: '10'
+    comment: "TX \u6301\u7EED\u65F6\u95F4\uFF0CHead \u4F1A\u81EA\u52A8\u7528 samp_rate\
+      \ * tx_seconds \u7B97\u51FA\u6837\u672C\u6570\u3002"
+    value: '20'
   states:
     bus_sink: false
     bus_source: false
@@ -127,25 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 120]
-    rotation: 0
-    state: enabled
-- name: blocks_complex_to_mag_0
-  id: blocks_complex_to_mag
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: "\u628A\u9001\u5F80 USRP Sink \u7684\u590D\u6570 IQ \u8F6C\u6210\u5E45\
-      \u5EA6\u5305\u7EDC\uFF0C\u7528\u6765\u786E\u8BA4 TX \u6A21\u677F\u786E\u5B9E\
-      \u5728\u6D41\u52A8\u3002"
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [760, 488]
+    coordinate: [344, 108.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0
@@ -178,7 +149,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: tx_samples
+    num_items: int(samp_rate * tx_seconds)
     type: complex
     vlen: '1'
   states:
@@ -186,105 +157,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [488, 376]
-    rotation: 0
-    state: enabled
-- name: qtgui_time_sink_x_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'True'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: "\u5B9E\u65F6\u89C2\u5BDF TX \u5E45\u5EA6\u5305\u7EDC\uFF1B\u63A5\u5728\
-      \ Head \u540E\u9762\uFF0C\u6240\u4EE5\u5B83\u663E\u793A\u7684\u5C31\u662F\u672C\
-      \u6B21\u9001\u5165 USRP Sink \u7684\u6837\u672C\u3002"
-    ctrlpanel: 'True'
-    entags: 'True'
-    grid: 'True'
-    gui_hint: ''
-    label1: TX |IQ| envelope
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: TX Time Amplitude
-    nconnections: '1'
-    size: int(samp_rate * 0.025)
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '0.3'
-    ymin: '0'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1104, 388.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_sink_0
@@ -566,9 +438,7 @@ blocks:
     state: enabled
 
 connections:
-- [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_file_source_0, '0', blocks_head_0, '0']
-- [blocks_head_0, '0', blocks_complex_to_mag_0, '0']
 - [blocks_head_0, '0', uhd_usrp_sink_0, '0']
 
 metadata:

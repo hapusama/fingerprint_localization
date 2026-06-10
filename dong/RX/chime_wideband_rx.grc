@@ -9,7 +9,7 @@ options:
     description: Low-rate raw IQ receiver for Chime-style chirp sounding
     gen_cmake: 'Off'
     gen_linking: dynamic
-    generate_options: qt_gui
+    generate_options: no_gui
     hier_block_src_path: '.:'
     id: chime_wideband_rx
     max_nouts: '0'
@@ -28,7 +28,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 8]
+    coordinate: [1000, 64.0]
     rotation: 0
     state: enabled
 
@@ -42,20 +42,19 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 120]
+    coordinate: [720, 132.0]
     rotation: 0
     state: enabled
 - name: capture_seconds
   id: variable
   parameters:
-    comment: 2 Msps fc32 is about 16 MB/s. Increase sample rate only after this test
-      is stable.
+    comment: "20 Msps fc32 \u7EA6 160 MB/s\uFF1B10 \u79D2\u4F1A\u5199\u7EA6 1.6 GB\u3002"
     value: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 120]
+    coordinate: [352, 108.0]
     rotation: 0
     state: enabled
 - name: center_freq
@@ -67,7 +66,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 24]
+    coordinate: [360, 20.0]
     rotation: 0
     state: enabled
 - name: output_file
@@ -86,12 +85,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '2000000'
+    value: '20000000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 24]
+    coordinate: [512, 28.0]
     rotation: 0
     state: enabled
 - name: rx_device_addr
@@ -103,7 +102,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 120]
+    coordinate: [520, 220.0]
     rotation: 0
     state: enabled
 - name: rx_gain_db
@@ -122,30 +121,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '2000000'
+    value: '20000000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 24]
-    rotation: 0
-    state: enabled
-- name: blocks_complex_to_mag_0
-  id: blocks_complex_to_mag
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: "\u628A\u590D\u6570 IQ \u8F6C\u6210\u5E45\u5EA6\u5305\u7EDC |I+jQ|\uFF0C\
-      \u65B9\u4FBF\u5728\u65F6\u95F4\u8F74\u4E0A\u770B\u8109\u51B2\u6709\u6CA1\u6709\
-      \u51FA\u73B0\u3002"
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [576, 592.0]
+    coordinate: [224, 20.0]
     rotation: 0
     state: enabled
 - name: blocks_file_sink_0
@@ -163,9 +144,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 384]
+    coordinate: [952, 300.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_head_0
   id: blocks_head
   parameters:
@@ -181,106 +162,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 384]
-    rotation: 0
-    state: disabled
-- name: qtgui_time_sink_x_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'True'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: "\u5B9E\u65F6\u89C2\u5BDF RX \u5E45\u5EA6\u5305\u7EDC\uFF1B\u9ED8\u8BA4\
-      \ 25 ms \u7A97\u53E3\uFF0C\u53EF\u4EE5\u770B\u5230 20 ms \u5468\u671F chirp\
-      \ \u662F\u5426\u5192\u51FA\u6765\u3002"
-    ctrlpanel: 'True'
-    entags: 'True'
-    grid: 'True'
-    gui_hint: ''
-    label1: '|IQ| envelope'
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: RX Time Amplitude
-    nconnections: '1'
-    size: int(samp_rate * 0.025)
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '1'
-    ymin: '0'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 520]
+    coordinate: [560, 384.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_source_0
@@ -721,8 +603,8 @@ blocks:
     state: enabled
 
 connections:
-- [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_0, '0']
-- [uhd_usrp_source_0, '0', blocks_complex_to_mag_0, '0']
+- [blocks_head_0, '0', blocks_file_sink_0, '0']
+- [uhd_usrp_source_0, '0', blocks_head_0, '0']
 
 metadata:
   file_format: 1
