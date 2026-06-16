@@ -16,8 +16,8 @@ DEFAULT_OUTPUT = DONG_ROOT / "inputs" / "chime_test_tx_period_fc32.bin"
 
 def generate_waveform(
     output: str | Path = DEFAULT_OUTPUT,
-    fs: float = 2e6,
-    chirp_bw: float = 1e6,
+    fs: float = 20e6,
+    chirp_bw: float = 18e6,
     chirp_duration: float = 1e-3,
     period: float = 20e-3,
     amplitude: float = 0.2,
@@ -52,8 +52,8 @@ def generate_waveform(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate a 20 ms fc32 LFM upchirp period")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
-    parser.add_argument("--fs", type=float, default=2e6)
-    parser.add_argument("--chirp-bw", type=float, default=1e6)
+    parser.add_argument("--fs", type=float, default=20e6)
+    parser.add_argument("--chirp-bw", type=float, default=18e6)
     parser.add_argument("--chirp-duration", type=float, default=1e-3)
     parser.add_argument("--period", type=float, default=20e-3)
     parser.add_argument("--amplitude", type=float, default=0.2)

@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Run the Chime wideband TX and RX flowgraphs together for a quick link test."""
+"""Run a two-USRP CHIME-style TX/RX self-test and analyze the 10 s capture."""
 
 from __future__ import annotations
 
 import argparse
-import queue
 import sys
-import threading
 import time
+from datetime import datetime
 from pathlib import Path
 
 
@@ -19,66 +18,110 @@ for path in (TX_DIR, RX_DIR):
     sys.path.insert(0, str(path))
 
 
-def run_top_block(name: str, make_tb, started: threading.Event, errors: queue.Queue) -> None:
-    tb = None
-    try:
-        tb = make_tb()
-        # start() 只负责启动 GNU Radio 调度线程；实际数据流在底层线程里运行。
-        tb.start()
-        started.set()
-        tb.wait()
-        print(f"[{name}] finished")
-    except BaseException as exc:
-        errors.put((name, exc))
-        started.set()
-    finally:
-        if tb is not None:
-            try:
-                tb.stop()
-                tb.wait()
-            except BaseException:
-                pass
-
-
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Start RX and TX in two threads, then analyze the capture.")
+    parser = argparse.ArgumentParser(description="Start TX first, capture RX, then run matched-filter analysis.")
     parser.add_argument("--waveform-file", default=str(DONG_ROOT / "inputs" / "chime_test_tx_period_fc32.bin"))
-    parser.add_argument("--capture-file", default=str(DONG_ROOT / "outputs" / "captures" / "chime_test_rx_fc32.bin"))
-    parser.add_argument("--csv-out", default=str(DONG_ROOT / "outputs" / "analysis" / "chime_test_paths.csv"))
-    parser.add_argument("--json-out", default=str(DONG_ROOT / "outputs" / "analysis" / "chime_test_summary.json"))
-    parser.add_argument("--fs", type=float, default=2e6)
-    parser.add_argument("--chirp-bw", type=float, default=1e6)
+    parser.add_argument("--capture-file", default="")
+    parser.add_argument("--csv-out", default=str(DONG_ROOT / "outputs" / "analysis" / "chime_self_test_paths.csv"))
+    parser.add_argument("--json-out", default=str(DONG_ROOT / "outputs" / "analysis" / "chime_self_test_summary.json"))
+    parser.add_argument("--fs", type=float, default=20e6)
+    parser.add_argument("--chirp-bw", type=float, default=18e6)
     parser.add_argument("--chirp-duration", type=float, default=1e-3)
     parser.add_argument("--period", type=float, default=20e-3)
     parser.add_argument("--amplitude", type=float, default=0.2)
     parser.add_argument("--center", type=float, default=487.7e6)
-    parser.add_argument("--rf-bandwidth", type=float, default=2e6)
-    parser.add_argument("--tx-seconds", type=float, default=10.0)
-    parser.add_argument("--rx-seconds", type=float, default=12.0)
-    parser.add_argument("--tx-start-delay", type=float, default=0.5)
-    parser.add_argument("--start-timeout", type=float, default=60.0)
-    parser.add_argument("--tx-gain-db", type=float, default=10.0)
-    parser.add_argument("--rx-gain-db", type=float, default=20.0)
-    parser.add_argument("--tx-device-addr", default="serial=2512552")
-    parser.add_argument("--rx-device-addr", default="serial=2603160")
+    parser.add_argument("--rf-bandwidth", type=float, default=20e6)
+    parser.add_argument("--tx-seconds", type=float, default=50.0)
+    parser.add_argument("--rx-seconds", type=float, default=10.05)
+    parser.add_argument("--tx-lead-time", type=float, default=1.0)
+    parser.add_argument("--tx-gain-db", type=float, default=100.0)
+    parser.add_argument("--rx-gain-db", type=float, default=40.0)
+    parser.add_argument("--tx-device-addr", default="serial=2512552,num_send_frames=1024")
+    parser.add_argument("--rx-device-addr", default="serial=2603160,num_recv_frames=512")
     parser.add_argument("--tx-antenna", default="TX/RX")
     parser.add_argument("--rx-antenna", default="TX/RX")
     parser.add_argument("--skip-waveform", action="store_true", help="Use the existing waveform file.")
-    parser.add_argument("--no-tx", action="store_true", help="Start RX only. Use this to measure the noise floor.")
+    parser.add_argument("--no-tx", action="store_true", help="Capture RX only. Use this to measure the noise floor.")
     parser.add_argument("--no-analyze", action="store_true", help="Only capture, do not run matched-filter analysis.")
-    parser.add_argument("--max-segments", type=int, default=0, help="0 means analyze all full periods.")
+    parser.add_argument("--max-segments", type=int, default=500, help="Analyze this many 20 ms periods; 500 is exactly 10.00 s, 0 means all full periods.")
+    parser.add_argument("--corr-gate", type=float, default=0.25)
+    parser.add_argument("--require-trusted-ratio", type=float, default=0.95)
     return parser.parse_args()
+
+
+def make_capture_path(raw_path: str) -> Path:
+    if raw_path:
+        return Path(raw_path).expanduser()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return Path("/Users/siri/Desktop/data") / f"self_rx_test_{timestamp}.bin"
+
+
+def build_tx_top_block(args: argparse.Namespace, waveform_file: Path):
+    from gnuradio import blocks, gr, uhd
+    import pmt
+
+    tb = gr.top_block("CHIME Wideband Self-Test TX", catch_exceptions=True)
+    usrp = uhd.usrp_sink(
+        ",".join((args.tx_device_addr, "")),
+        uhd.stream_args(cpu_format="fc32", otw_format="sc16", channels=[0]),
+        "",
+    )
+    usrp.set_clock_source("internal", 0)
+    usrp.set_samp_rate(args.fs)
+    usrp.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
+    usrp.set_center_freq(args.center, 0)
+    usrp.set_antenna(args.tx_antenna, 0)
+    usrp.set_bandwidth(args.rf_bandwidth, 0)
+    usrp.set_gain(args.tx_gain_db, 0)
+
+    source = blocks.file_source(gr.sizeof_gr_complex, str(waveform_file), True, 0, 0)
+    source.set_begin_tag(pmt.PMT_NIL)
+    head = blocks.head(gr.sizeof_gr_complex, int(round(args.fs * args.tx_seconds)))
+
+    tb.connect(source, head)
+    tb.connect(head, usrp)
+    return tb
+
+
+def build_rx_top_block(args: argparse.Namespace, capture_file: Path):
+    from gnuradio import blocks, gr, uhd
+
+    capture_file.parent.mkdir(parents=True, exist_ok=True)
+
+    tb = gr.top_block("CHIME Wideband Self-Test RX", catch_exceptions=True)
+    usrp = uhd.usrp_source(
+        ",".join((args.rx_device_addr, "")),
+        uhd.stream_args(cpu_format="fc32", otw_format="sc16", channels=[0]),
+    )
+    usrp.set_clock_source("internal", 0)
+    usrp.set_samp_rate(args.fs)
+    usrp.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
+    usrp.set_center_freq(args.center, 0)
+    usrp.set_antenna(args.rx_antenna, 0)
+    usrp.set_bandwidth(args.rf_bandwidth, 0)
+    usrp.set_rx_agc(False, 0)
+    usrp.set_gain(args.rx_gain_db, 0)
+
+    head = blocks.head(gr.sizeof_gr_complex, int(round(args.fs * args.rx_seconds)))
+    sink = blocks.file_sink(gr.sizeof_gr_complex, str(capture_file), False)
+    sink.set_unbuffered(False)
+
+    tb.connect(usrp, head)
+    tb.connect(head, sink)
+    return tb
 
 
 def main() -> None:
     args = parse_args()
-    waveform_file = Path(args.waveform_file)
-    capture_file = Path(args.capture_file)
+    waveform_file = Path(args.waveform_file).expanduser()
+    capture_file = make_capture_path(args.capture_file)
+
+    if args.tx_seconds < args.rx_seconds + args.tx_lead_time:
+        raise SystemExit("tx_seconds must cover tx_lead_time + rx_seconds")
 
     if not args.skip_waveform and not args.no_tx:
         from chime_wideband_make_tx_waveform import generate_waveform
 
-        # 每次联调前重新生成模板文件，避免 TX 读到过期参数的 bin 文件。
         stats = generate_waveform(
             output=waveform_file,
             fs=args.fs,
@@ -87,72 +130,32 @@ def main() -> None:
             period=args.period,
             amplitude=args.amplitude,
         )
-        print(f"[waveform] ready: {stats['path']} ({stats['bytes']} bytes)")
+        print(f"[waveform] ready: {stats['path']} ({stats['samples']} samples, {stats['bytes']} bytes)")
     elif not args.no_tx and not waveform_file.exists():
         raise FileNotFoundError(waveform_file)
 
-    errors: queue.Queue = queue.Queue()
-    rx_started = threading.Event()
-    tx_started = threading.Event()
-
+    tx_tb = None
     try:
-        from chime_wideband_tx import chime_wideband_tx
-        from chime_wideband_rx import chime_wideband_rx
-    except ModuleNotFoundError as exc:
-        if exc.name == "gnuradio":
-            raise SystemExit("GNU Radio is not available in this Python. Run this with the radioconda/GNU Radio python.") from exc
-        raise
+        if args.no_tx:
+            print("[tx] disabled")
+        else:
+            print(f"[tx] starting {args.tx_seconds:.1f} s on {args.tx_device_addr}")
+            tx_tb = build_tx_top_block(args, waveform_file)
+            tx_tb.start()
+            print(f"[rx] waiting {args.tx_lead_time:.3f} s for TX to settle")
+            time.sleep(max(0.0, args.tx_lead_time))
 
-    def make_rx() -> chime_wideband_rx:
-        return chime_wideband_rx(
-            samp_rate=args.fs,
-            capture_seconds=args.rx_seconds,
-            rx_gain_db=args.rx_gain_db,
-            rx_device_addr=args.rx_device_addr,
-            rx_antenna=args.rx_antenna,
-            rf_bandwidth=args.rf_bandwidth,
-            output_file=capture_file,
-            center_freq=args.center,
-        )
+        print(f"[rx] capturing {args.rx_seconds:.1f} s on {args.rx_device_addr}")
+        rx_tb = build_rx_top_block(args, capture_file)
+        rx_tb.start()
+        rx_tb.wait()
+        print(f"[capture] saved: {capture_file}")
+    finally:
+        if tx_tb is not None:
+            print("[tx] stopping")
+            tx_tb.stop()
+            tx_tb.wait()
 
-    def make_tx() -> chime_wideband_tx:
-        return chime_wideband_tx(
-            tx_seconds=args.tx_seconds,
-            samp_rate=args.fs,
-            waveform_file=waveform_file,
-            tx_gain_db=args.tx_gain_db,
-            tx_device_addr=args.tx_device_addr,
-            tx_antenna=args.tx_antenna,
-            rf_bandwidth=args.rf_bandwidth,
-            center_freq=args.center,
-        )
-
-    rx_thread = threading.Thread(target=run_top_block, args=("rx", make_rx, rx_started, errors), daemon=False)
-    tx_thread = threading.Thread(target=run_top_block, args=("tx", make_tx, tx_started, errors), daemon=False)
-
-    print("[rx] starting")
-    rx_thread.start()
-    if not rx_started.wait(timeout=args.start_timeout):
-        raise TimeoutError(f"RX did not start within {args.start_timeout:.1f} seconds")
-    if not errors.empty():
-        name, exc = errors.get()
-        raise RuntimeError(f"{name} failed before TX start") from exc
-
-    if args.no_tx:
-        print("[tx] disabled")
-    else:
-        # RX 先启动，给硬件调谐和文件 sink 留出时间，再启动 TX。
-        print(f"[tx] starting after {args.tx_start_delay:.3f} s")
-        time.sleep(max(0.0, args.tx_start_delay))
-        tx_thread.start()
-        tx_thread.join()
-    rx_thread.join()
-
-    if not errors.empty():
-        name, exc = errors.get()
-        raise RuntimeError(f"{name} failed") from exc
-
-    print(f"[capture] saved: {capture_file}")
     if args.no_analyze:
         return
 
@@ -164,7 +167,7 @@ def main() -> None:
         chirp_bw=args.chirp_bw,
         chirp_duration=args.chirp_duration,
         period=args.period,
-        corr_gate=0.25,
+        corr_gate=args.corr_gate,
         threshold_db=-20.0,
         min_gap_us=0.10,
         pre_delay_us=1.0,
@@ -175,9 +178,18 @@ def main() -> None:
         json_out=args.json_out,
     )
     summary = analyze(analysis_args)
-    print(f"[analyze] trusted: {summary['trusted_segments']}/{summary['segments']}")
+    segments = max(int(summary["segments"]), 1)
+    trusted = int(summary["trusted_segments"])
+    trusted_ratio = trusted / segments
+    print(f"[analyze] trusted: {trusted}/{segments} ({trusted_ratio:.3f})")
+    print(f"[analyze] mean corr: {summary['mean_corr_score']:.3f}")
     print(f"[analyze] max corr: {summary['max_corr_score']:.3f}")
     print(f"[analyze] csv: {summary['csv_out']}")
+
+    if trusted_ratio < args.require_trusted_ratio:
+        raise SystemExit(
+            f"trusted ratio {trusted_ratio:.3f} is below required {args.require_trusted_ratio:.3f}"
+        )
 
 
 if __name__ == "__main__":

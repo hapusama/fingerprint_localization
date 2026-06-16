@@ -37,8 +37,9 @@ def fft_correlate_valid(segment: np.ndarray, ref: np.ndarray) -> np.ndarray:
         return np.empty(0, dtype=np.complex64)
     n_corr = segment.size + ref.size - 1
     n_fft = 1 << int(np.ceil(np.log2(n_corr)))
-    corr = np.fft.ifft(np.fft.fft(segment, n_fft) * np.conj(np.fft.fft(ref, n_fft)))
-    return corr[:valid_len]
+    kernel = np.conj(ref[::-1])
+    corr = np.fft.ifft(np.fft.fft(segment, n_fft) * np.fft.fft(kernel, n_fft))
+    return corr[ref.size - 1 : ref.size - 1 + valid_len]
 
 
 def local_energy_valid(segment: np.ndarray, ref_len: int) -> np.ndarray:
@@ -101,13 +102,17 @@ def analyze(args: argparse.Namespace) -> dict:
 
     for seg_id in range(max_segments):
         start = seg_id * period_len
-        segment = np.asarray(x[start : start + period_len], dtype=np.complex64)
+        stop = min(x.size, start + period_len + ref.size - 1)
+        segment = np.asarray(x[start:stop], dtype=np.complex64)
         corr = fft_correlate_valid(segment, ref)
         if corr.size == 0:
             continue
         local_energy = local_energy_valid(segment, ref.size)
-        denom = np.sqrt(np.maximum(local_energy * ref_energy, 1e-30))
-        score = np.abs(corr) / denom
+        energy_floor = max(float(np.max(local_energy)) * 1e-6, 1e-20)
+        valid_energy = local_energy >= energy_floor
+        score = np.zeros(corr.size, dtype=np.float64)
+        denom = np.sqrt(local_energy[valid_energy] * ref_energy)
+        score[valid_energy] = np.abs(corr[valid_energy]) / denom
         detect_index = int(np.argmax(score))
         detect_score = float(score[detect_index])
         score_values.append(detect_score)
@@ -166,8 +171,8 @@ def analyze(args: argparse.Namespace) -> dict:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Analyze LFM chirp sounding IQ")
     parser.add_argument("--infile", default=str(DEFAULT_CAPTURE))
-    parser.add_argument("--fs", type=float, default=2e6)
-    parser.add_argument("--chirp-bw", type=float, default=1e6)
+    parser.add_argument("--fs", type=float, default=20e6)
+    parser.add_argument("--chirp-bw", type=float, default=18e6)
     parser.add_argument("--chirp-duration", type=float, default=1e-3)
     parser.add_argument("--period", type=float, default=20e-3)
     parser.add_argument("--corr-gate", type=float, default=0.25)

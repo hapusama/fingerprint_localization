@@ -123,10 +123,11 @@ def render(args: argparse.Namespace) -> Path:
     period = float(args.period)
     chirp_duration = float(args.chirp_duration)
     chirp_bw = float(args.chirp_bw)
-    first_period = int(np.floor(args.skip / period)) if period > 0 else 0
+    chirp_offset = float(args.chirp_offset)
+    first_period = int(np.floor((args.skip - chirp_offset) / period)) if period > 0 else 0
     periods = int(np.ceil((args.skip + total_s) / period)) + 1
     for period_idx in range(first_period, periods):
-        t0_abs = period_idx * period
+        t0_abs = period_idx * period + chirp_offset
         t0 = t0_abs - args.skip
         t1 = t0 + chirp_duration
         if t1 < 0 or t0 > total_s:
@@ -171,10 +172,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Render a received chirp spectrogram PNG")
     parser.add_argument("--infile", default=str(DEFAULT_CAPTURE))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
-    parser.add_argument("--fs", type=float, default=2e6)
-    parser.add_argument("--chirp-bw", type=float, default=1e6)
+    parser.add_argument("--fs", type=float, default=20e6)
+    parser.add_argument("--chirp-bw", type=float, default=18e6)
     parser.add_argument("--chirp-duration", type=float, default=1e-3)
     parser.add_argument("--period", type=float, default=20e-3)
+    parser.add_argument("--chirp-offset", type=float, default=0.0, help="Seconds from capture start to the first chirp in the period grid")
     parser.add_argument("--skip", type=float, default=0.0, help="Seconds to skip from the capture start")
     parser.add_argument("--duration", type=float, default=0.12, help="Seconds to render")
     parser.add_argument("--nperseg", type=int, default=512)

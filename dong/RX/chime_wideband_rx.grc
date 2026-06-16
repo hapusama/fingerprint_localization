@@ -9,7 +9,7 @@ options:
     description: Low-rate raw IQ receiver for Chime-style chirp sounding
     gen_cmake: 'Off'
     gen_linking: dynamic
-    generate_options: no_gui
+    generate_options: qt_gui
     hier_block_src_path: '.:'
     id: chime_wideband_rx
     max_nouts: '0'
@@ -33,6 +33,55 @@ options:
     state: enabled
 
 blocks:
+- name: capture_add_timestamp
+  id: variable
+  parameters:
+    comment: Add YYYYMMDD_HHMMSS to avoid overwriting earlier captures.
+    value: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 164.0]
+    rotation: 0
+    state: enabled
+- name: capture_name
+  id: variable
+  parameters:
+    comment: Base filename without extension. Use only filename-safe characters.
+    value: '"chime_capture"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 164.0]
+    rotation: 0
+    state: enabled
+- name: capture_output_dir
+  id: variable
+  parameters:
+    comment: Change this before running. Desktop/data is used for local capture files.
+    value: r"/Users/siri/Desktop/data"
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 164.0]
+    rotation: 0
+    state: enabled
+- name: capture_output_dir_ready
+  id: variable
+  parameters:
+    comment: Creates the output directory before File Sink opens the file.
+    value: __import__("pathlib").Path(capture_output_dir).expanduser().mkdir(parents=True,
+      exist_ok=True)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 232.0]
+    rotation: 0
+    state: enabled
 - name: capture_samples
   id: variable
   parameters:
@@ -48,13 +97,25 @@ blocks:
 - name: capture_seconds
   id: variable
   parameters:
-    comment: "20 Msps fc32 \u7EA6 160 MB/s\uFF1B10 \u79D2\u4F1A\u5199\u7EA6 1.6 GB\u3002"
+    comment: 20 Msps fc32 is about 160 MB/s; 10 s records about 1.6 GB.
     value: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [352, 108.0]
+    rotation: 0
+    state: enabled
+- name: capture_timestamp
+  id: variable
+  parameters:
+    comment: Evaluated when the flowgraph starts.
+    value: __import__("time").strftime("%Y%m%d_%H%M%S")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 164.0]
     rotation: 0
     state: enabled
 - name: center_freq
@@ -69,16 +130,30 @@ blocks:
     coordinate: [360, 20.0]
     rotation: 0
     state: enabled
-- name: output_file
+- name: gui_decim
   id: variable
   parameters:
-    comment: GNU Radio complex64/fc32 IQ output.
-    value: r"D:\Desktop\fingerprint_localization\dong\outputs\captures\chime_test_rx_fc32.bin"
+    comment: Decimate only the GUI monitor branch; file capture still records full-rate
+      IQ.
+    value: '20'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 216]
+    coordinate: [720, 216.0]
+    rotation: 0
+    state: enabled
+- name: output_file
+  id: variable
+  parameters:
+    comment: GNU Radio complex64/fc32 IQ output path assembled from capture settings.
+    value: str(__import__("pathlib").Path(capture_output_dir).expanduser() / (capture_name
+      + ("_" + capture_timestamp if capture_add_timestamp else "") + ".bin"))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 232.0]
     rotation: 0
     state: enabled
 - name: rf_bandwidth
@@ -106,11 +181,23 @@ blocks:
     coordinate: [520, 220.0]
     rotation: 0
     state: enabled
+- name: rx_antenna
+  id: variable
+  parameters:
+    comment: B210 RX input. Change to RX2 if the receive antenna is connected there.
+    value: '"TX/RX"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 84.0]
+    rotation: 0
+    state: enabled
 - name: rx_gain_db
   id: variable
   parameters:
     comment: Absolute B210 RX gain in dB.
-    value: '20'
+    value: '40'
   states:
     bus_sink: false
     bus_source: false
@@ -128,6 +215,22 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [224, 20.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Envelope display for the dedicated time-domain monitor.
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 608.0]
     rotation: 0
     state: enabled
 - name: blocks_file_sink_0
@@ -166,12 +269,156 @@ blocks:
     coordinate: [560, 384.0]
     rotation: 0
     state: enabled
+- name: blocks_keep_one_in_n_0
+  id: blocks_keep_one_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Lightweight monitor branch for the Qt GUI sink.
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: gui_decim
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 504.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate / gui_decim
+    comment: Real-time decimated monitor; close the Qt window after capture ends.
+    fc: center_freq
+    fftsize: '2048'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"RX Monitor"'
+    plotconst: 'False'
+    plotfreq: 'True'
+    plottime: 'False'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'True'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 496.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: Magnitude time display. This is easier to see than raw I/Q.
+    ctrlpanel: 'True'
+    entags: 'False'
+    grid: 'True'
+    gui_hint: ''
+    label1: Magnitude
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"RX Magnitude Time"'
+    nconnections: '1'
+    size: int((samp_rate / gui_decim) * 0.02)
+    srate: samp_rate / gui_decim
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.1'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Magnitude
+    ymax: '1'
+    ymin: '0'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1240, 608.0]
+    rotation: 0
+    state: enabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
     affinity: ''
     alias: ''
-    ant0: '"TX/RX"'
+    ant0: rx_antenna
     ant1: '"RX2"'
     ant10: '"RX2"'
     ant11: '"RX2"'
@@ -604,7 +851,11 @@ blocks:
     state: enabled
 
 connections:
+- [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_head_0, '0', blocks_file_sink_0, '0']
+- [blocks_head_0, '0', blocks_keep_one_in_n_0, '0']
+- [blocks_keep_one_in_n_0, '0', blocks_complex_to_mag_0, '0']
+- [blocks_keep_one_in_n_0, '0', qtgui_sink_x_0, '0']
 - [uhd_usrp_source_0, '0', blocks_head_0, '0']
 
 metadata:
