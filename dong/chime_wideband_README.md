@@ -38,7 +38,7 @@ TX:
 - Waveform: 18 MHz LFM upchirp, -9 MHz to +9 MHz baseband
 - Chirp duration: 1 ms
 - Repeat period: 20 ms
-- Waveform file: `dong/inputs/chime_test_tx_period_fc32.bin`
+- Waveform file: `D:\Desktop\fingerprint_localization\dong\inputs\chime_test_tx_period_fc32.bin`
 
 RX:
 
