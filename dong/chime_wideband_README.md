@@ -5,14 +5,13 @@ full TX/RX flow and visualizing the CHIME-style wideband upchirp ridge.
 
 Current USRP assignment:
 
-- TX: `serial=2512552`
-- RX: `serial=2603160`
+- TX: `serial=2603160`
+- RX: `serial=2512552`
 
-For the local receiver machine, use the USRP with serial `2603160` and connect
-the receive cable/antenna to its `TX/RX` input by default. Change the GRC
-`rx_antenna` variable to `RX2` if the antenna is connected there. The other
-radio, serial `2512552`, is the transmitter and uses its `TX/RX` port. Do not rely on "Device 0" /
-"Device 1" ordering; use the serial number.
+For the local receiver machine, use the USRP with serial `2512552` and connect
+the receive cable/antenna to its `RX2` input. The other radio, serial
+`2603160`, is the transmitter and uses its `TX/RX` port. Do not rely on
+"Device 0" / "Device 1" ordering; use the serial number.
 
 If you are not sure which physical B210 has which serial, unplug one radio and
 run:
@@ -34,7 +33,7 @@ TX:
 - Center frequency: 487.7 MHz
 - Sample rate: 20 Msps
 - RF bandwidth: 20 MHz
-- TX gain: 100 dB
+- TX gain: 60 dB
 - TX duration: 50 s
 - Waveform: 18 MHz LFM upchirp, -9 MHz to +9 MHz baseband
 - Chirp duration: 1 ms
@@ -46,8 +45,8 @@ RX:
 - Center frequency: 487.7 MHz
 - Sample rate: 20 Msps
 - RF bandwidth: 20 MHz
-- RX gain: 40 dB
-- RX antenna/input: `TX/RX`
+- RX gain: 50 dB
+- RX antenna/input: `RX2`
 - Output: `/Users/siri/Desktop/data/chime_capture_<timestamp>.bin`
 - Capture length: 10 s
 

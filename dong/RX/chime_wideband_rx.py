@@ -71,9 +71,9 @@ class chime_wideband_rx(gr.top_block, Qt.QWidget):
         self.capture_output_dir = capture_output_dir = r"/Users/siri/Desktop/data"
         self.capture_name = capture_name = "chime_capture"
         self.capture_add_timestamp = capture_add_timestamp = True
-        self.rx_gain_db = rx_gain_db = 40
-        self.rx_device_addr = rx_device_addr = "serial=2603160,num_recv_frames=512"
-        self.rx_antenna = rx_antenna = "TX/RX"
+        self.rx_gain_db = rx_gain_db = 50
+        self.rx_device_addr = rx_device_addr = "serial=2512552,num_recv_frames=512"
+        self.rx_antenna = rx_antenna = "RX2"
         self.rf_bandwidth = rf_bandwidth = 20000000
         self.output_file = output_file = str(__import__("pathlib").Path(capture_output_dir).expanduser() / (capture_name + ("_" + capture_timestamp if capture_add_timestamp else "") + ".bin"))
         self.gui_decim = gui_decim = 20

@@ -173,7 +173,7 @@ blocks:
   parameters:
     comment: Change this if the RX USRP is the other radio. Extra UHD receive
       frames help absorb host scheduling jitter at 20 MS/s.
-    value: '"serial=2603160,num_recv_frames=512"'
+    value: '"serial=2512552,num_recv_frames=512"'
   states:
     bus_sink: false
     bus_source: false
@@ -184,8 +184,8 @@ blocks:
 - name: rx_antenna
   id: variable
   parameters:
-    comment: B210 RX input. Change to RX2 if the receive antenna is connected there.
-    value: '"TX/RX"'
+    comment: B210 RX input. Current local receiver uses RX2.
+    value: '"RX2"'
   states:
     bus_sink: false
     bus_source: false
@@ -197,7 +197,7 @@ blocks:
   id: variable
   parameters:
     comment: Absolute B210 RX gain in dB.
-    value: '40'
+    value: '50'
   states:
     bus_sink: false
     bus_source: false
