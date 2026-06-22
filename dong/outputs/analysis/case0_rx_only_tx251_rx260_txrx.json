@@ -1,0 +1,18 @@
+{
+  "infile": "dong\\outputs\\captures\\case0_rx_only_tx251_rx260_txrx.bin",
+  "fs_hz": 2000000.0,
+  "chirp_bw_hz": 1000000.0,
+  "chirp_duration_s": 0.001,
+  "period_s": 0.02,
+  "segments": 250,
+  "trusted_segments": 0,
+  "corr_gate": 0.25,
+  "threshold_db": -20.0,
+  "mean_corr_score": 0.08011866886583922,
+  "max_corr_score": 0.10045559495467166,
+  "mean_significant_peak_count": 0.0,
+  "peak_count_histogram": {
+    "0": 250
+  },
+  "csv_out": "dong\\outputs\\analysis\\case0_rx_only_tx251_rx260_txrx.csv"
+}

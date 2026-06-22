@@ -1,0 +1,41 @@
+# Local/raw datasets
+data/raw/
+data/packet_features_analysis/
+
+# Generated processed datasets, diagnostics, and experiment outputs
+data/processedData/
+model/v1/input/
+model/v1/output/
+
+# Model/checkpoint/data artifacts
+*.bin
+*.ckpt
+*.pth
+*.pt
+*.npy
+*.npz
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+
+# Training logs
+events.out.tfevents*
+lightning_logs/
+runs/
+wandb/
+
+# Python/runtime noise
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,25 @@
+##### Parameters used for area a #####
+# some parameters are reused for area b
+# Training settings
+train_flag: True
+data_name: "lab1_spectrum_peak16_pretrain_dataset.pth"
+frac_for_valid: 0.15
+frac_for_test: 0.05
+
+# Parameters for location classifier
+num_locs: 21
+input_dim: 16
+location_vector_name: "location_vector_multipath.csv"
+config: "configs/pretrain.yml"
+
+##### New parameters for pre-training CGM #####
+signal_feature_dim: 16           #
+loc_dim: 14            # 6 location dims + 6 multipath dims + sf/tp
+num_timesteps: 1000
+schedule: "linear"    # cosine, linear, quadratic, sigmoid
+data_channels: 2      # number of data channels（unet卷积层通道数）
+channel_dimension_scale: [1, 2, 4,8,16]
+num_epochs_rgm: 150
+batch_size_rgm: 256
+learning_rate_rgm: 0.001
+rgm_pretrain_path: "1_pretrained_lab1_spectrum_peak16_rgm.ckpt"

@@ -1,0 +1,36 @@
+##### Parameters used for area a #####
+# some parameters are reused for area b
+# Training settings
+train_flag: True
+data_name: "lab1_spectrum_peak16_finetune_dataset.pth" #1
+frac_for_valid: 0.15
+frac_for_test: 0.15
+
+# Parameters for location classifier
+num_locs: 21
+n_layers: 3
+input_dim: 16
+location_vector_name: "location_vector_multipath.csv"
+config: "configs/finetune.yml"
+
+##### New parameters for pre-training rgm #####
+signal_feature_dim: 16           # 因为inputdim太小，做一个线性变化为高纬度，组成channels*signal_feature_dim
+loc_dim: 14             # 6 location dims + 6 multipath dims + sf/tp
+num_timesteps: 1000
+schedule: "linear"    # cosine, linear, quadratic, sigmoid
+data_channels: 2      # number of data channels（unet卷积层通道数）
+channel_dimension_scale: [1, 2, 4,8,16]
+batch_size_rgm: 256
+learning_rate_rgm: 0.0001
+rgm_pretrain_path: "1_pretrained_lab1_spectrum_peak16_rgm.ckpt"
+
+
+##### New parameters for fine-tuning rGM #####
+data_name_ft: "lab1_spectrum_peak16_test_dataset.pth"
+ratios_locs: 1                #1 这个对部分采样点不齐的样本进行设置，其他的选择手动划分
+data_name_fake: "lab1_spectrum_peak16_area_fake_rgm.pth" #1
+save_model_name_fake: "classifier_lab1_spectrum_peak16.ckpt"
+calibrate_generated_stats: True
+num_epochs_rgm_ft: 120
+rgm_fine_tune_path: "2_finetuned_lab1_spectrum_peak16_rgm.ckpt"
+

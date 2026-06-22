@@ -1,0 +1,20 @@
+{
+  "infile": "D:\\Desktop\\fingerprint_localization\\dong\\outputs\\captures\\synthetic_loopback_rx_fc32.bin",
+  "fs_hz": 2000000.0,
+  "chirp_bw_hz": 1000000.0,
+  "chirp_duration_s": 0.001,
+  "period_s": 0.02,
+  "segments": 50,
+  "trusted_segments": 50,
+  "corr_gate": 0.25,
+  "threshold_db": -20.0,
+  "mean_corr_score": 0.9999997382484408,
+  "max_corr_score": 0.999999837737604,
+  "mean_significant_peak_count": 2.0,
+  "peak_count_histogram": {
+    "0": 0,
+    "1": 0,
+    "2": 50
+  },
+  "csv_out": "D:\\Desktop\\fingerprint_localization\\dong\\outputs\\analysis\\synthetic_loopback_paths.csv"
+}

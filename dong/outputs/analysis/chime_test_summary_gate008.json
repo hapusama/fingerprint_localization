@@ -1,0 +1,26 @@
+{
+  "infile": "D:\\Desktop\\fingerprint_localization\\dong\\outputs\\captures\\chime_test_rx_fc32.bin",
+  "fs_hz": 2000000.0,
+  "chirp_bw_hz": 1000000.0,
+  "chirp_duration_s": 0.001,
+  "period_s": 0.02,
+  "segments": 600,
+  "trusted_segments": 269,
+  "corr_gate": 0.08,
+  "threshold_db": -20.0,
+  "mean_corr_score": 0.08000704224334833,
+  "max_corr_score": 0.10268460766416282,
+  "mean_significant_peak_count": 2.0733333333333333,
+  "peak_count_histogram": {
+    "0": 331,
+    "1": 0,
+    "2": 1,
+    "3": 27,
+    "4": 103,
+    "5": 86,
+    "6": 46,
+    "7": 5,
+    "8": 1
+  },
+  "csv_out": "dong\\outputs\\analysis\\chime_test_paths_gate008.csv"
+}

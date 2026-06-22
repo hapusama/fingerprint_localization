@@ -1,0 +1,15 @@
+latent_dim: 128
+input_dim: 6
+condition_dim: 8
+dim_mults: [1, 2, 4, 8, 16]  # U-Net式的维度倍数，每层通道数将是input_dim的倍数
+pretrain_dataset_pth: "model/v1/input/floor3_sf_11_pretrain_dataset.pth"
+dataset_ft: "model/v1/input/floor3_sf_11_pretrain_dataset.pth"
+data_path_area_fake: "model/v1/output/floor3_sf_11_area_fake_vae.pth"
+num_epochs: 200
+valid_frac: 0.15
+test_frac: 0.05
+learning_rate: 0.001
+batch_size: 256
+
+save_model_path: "model/v1/output/vae/Vae_pretrain.ckpt"
+location_vector_path: "model/v1/output/location_vector_v2.csv"

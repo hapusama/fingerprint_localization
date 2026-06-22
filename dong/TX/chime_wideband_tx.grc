@@ -87,7 +87,7 @@ blocks:
   id: variable
   parameters:
     comment: Absolute B210 TX gain in dB.
-    value: '60'
+    value: '100'
   states:
     bus_sink: false
     bus_source: false

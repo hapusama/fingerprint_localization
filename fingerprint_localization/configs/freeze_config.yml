@@ -1,0 +1,23 @@
+# 逐步解冻的配置参数
+freeze_params:
+  # 初始阶段需要微调的层（其他层将被冻结）
+  # 注意：请确保这些名称能与模型参数名称部分匹配
+  initial_trainable_layers:
+    - "class_emb" 
+    - "final_conv"
+    - "time_mlp"  
+  
+  # 逐步解冻计划 (百分比表示在总epochs的多少比例时解冻)
+  # 一旦第一次训练运行，查看打印的参数名称，然后更精确地指定这些名称
+  unfreeze_schedule:
+    0.05:  # 5%训练完成后解冻
+      - "ups"       # 更具体的模块名，如果需要
+    0.10:  # 15%训练完成后解冻
+      - "mid_block"
+      - "mid_attn"  # 更具体的模块名，如果需要
+    0.2:  # 20%训练完成后解冻
+      - "downs"     # 更具体的模块名，如果需要
+  
+  # 是否启用逐步解冻策略
+  enable_gradual_unfreeze: false
+

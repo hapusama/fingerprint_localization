@@ -37,7 +37,7 @@ class chime_wideband_tx(gr.top_block):
         ##################################################
         self.waveform_file = waveform_file = r"D:\Desktop\fingerprint_localization\dong\inputs\chime_test_tx_period_fc32.bin"
         self.tx_seconds = tx_seconds = 50
-        self.tx_gain_db = tx_gain_db = 60
+        self.tx_gain_db = tx_gain_db = 100
         self.tx_device_addr = tx_device_addr = "serial=2603160,num_send_frames=1024"
         self.samp_rate = samp_rate = 20000000
         self.rf_bandwidth = rf_bandwidth = 20000000

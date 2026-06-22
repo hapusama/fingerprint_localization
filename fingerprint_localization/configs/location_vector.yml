@@ -1,0 +1,29 @@
+##### Parameters used for area a #####
+# some parameters are reused for area b
+# Training settings
+train_flag: True
+gateway_X: 544
+gateway_Y: 460
+data_name: "FLOOR3_v2.pth"
+# Parameters for location classifier
+configs: "location_vector.yml"
+location_vector_name: "location_vector_20m.csv"
+
+##### Parameters used for area a #####
+# some parameters are reused for area b
+# Training settings
+train_flag: True
+save_model_name: "classifier_area_a.ckpt"
+frac_for_valid: 0.05
+frac_for_test: 0.25
+
+# Parameters for location classifier
+num_locs: 20
+input_dim: 5
+hidden_dim: 128
+n_layers: 3
+dropout_pra: 0.3
+learning_rate: 0.0001
+num_epochs: 200
+batch_size: 256
+

@@ -1,6 +1,10 @@
 # Generated SDR waveform/capture artifacts. Keep these local; they are often huge.
-dong/inputs/*.bin
-dong/outputs/
+*.bin
+dong/data_analysis/
+
+# Archive/OS metadata noise
+.DS_Store
+__MACOSX/
 
 # Python/runtime noise
 __pycache__/
