@@ -67,6 +67,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--all-label-count", type=int, default=54)
     parser.add_argument("--min-score-db", type=float, default=0.0)
     parser.add_argument("--max-peak-std", type=float, default=2.0)
+    parser.add_argument(
+        "--phase-divide-two-pi",
+        action="store_true",
+        help="Scale phase features by 2*pi before global feature normalization.",
+    )
     parser.add_argument("--keep-raw", action="store_true", help="Also store raw 2x16 features in the .pth payload.")
     return parser.parse_args()
 
@@ -109,6 +114,13 @@ def main() -> None:
     #    raw_2x16 的形状是 [N, 2, 16]。
     mag = df[mag_columns].to_numpy(dtype=np.float32)
     phase = df[phase_columns].to_numpy(dtype=np.float32)
+    phase_source_mode = "unknown"
+    if "phase_mode" in df.columns:
+        phase_modes = sorted(str(value) for value in df["phase_mode"].dropna().unique())
+        phase_source_mode = phase_modes[0] if len(phase_modes) == 1 else ",".join(phase_modes)
+    if args.phase_divide_two_pi:
+        phase = phase / np.float32(2.0 * np.pi)
+        df.loc[:, phase_columns] = phase
     raw_2x16 = np.stack([mag, phase], axis=1)
 
     # 当前 MLP 分类器吃一维向量，所以再把 [2,16] 拉平成 32 维。
@@ -138,9 +150,13 @@ def main() -> None:
         "shape_2x16": [int(len(df)), 2, int(args.bin_count)],
         "feature_order": {
             "channel_0": "magnitude",
-            "channel_1": "relative_phase",
+            "channel_1": phase_source_mode if not args.phase_divide_two_pi else f"{phase_source_mode}_div_2pi",
             "bin_offsets": offsets,
             "flat_order": "mag[-8..+7], phase[-8..+7] after row-major flatten of [2,16]",
+        },
+        "phase_preprocess": {
+            "source_mode": phase_source_mode,
+            "divide_two_pi": bool(args.phase_divide_two_pi),
         },
         "filters": {
             "min_score_db": float(args.min_score_db),

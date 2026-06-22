@@ -1004,6 +1004,11 @@ def extract_packet_features(
 
     local_complex_arr = np.vstack(local_complex)
     local_mag_arr = np.vstack(local_mag)
+    local_power_arr = local_mag_arr ** 2
+    center_idx = list(offsets).index(0) if 0 in offsets else len(offsets) // 2
+    center_power = local_power_arr[:, center_idx]
+    s17_c_s = float(np.mean(center_power / (np.sum(local_power_arr, axis=1) + EPS)))
+    s17_j_s = float(np.std(center_power) / (np.mean(center_power) + EPS))
 
     # 5) 多个前导码 symbol 做平均，得到一个包级别的指纹。
     #    幅度直接平均；相位先平均复数，再取 angle，避免直接平均角度导致跳变问题。
@@ -1044,6 +1049,8 @@ def extract_packet_features(
         "detect_score_db": candidate.score_db,
         "detect_peak_bin_mean": candidate.peak_bin_mean,
         "detect_peak_bin_std": candidate.peak_bin_std,
+        "s17_c_s": s17_c_s,
+        "s17_j_s": s17_j_s,
     }
 
     if args.phase_mode == "both":
@@ -1373,6 +1380,8 @@ def build_header(offsets: Sequence[int], phase_mode: str) -> List[str]:
         "detect_score_db",
         "detect_peak_bin_mean",
         "detect_peak_bin_std",
+        "s17_c_s",
+        "s17_j_s",
     ]
     mag_cols = [f"preamble_fft_mag_bin_{offset_suffix(offset)}" for offset in offsets]
     phase_cols = [f"preamble_fft_phase_bin_{offset_suffix(offset)}" for offset in offsets]

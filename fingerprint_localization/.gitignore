@@ -6,6 +6,8 @@ data/packet_features_analysis/
 data/processedData/
 model/v1/input/
 model/v1/output/
+model/v2/input/
+model/v2/output/
 
 # Model/checkpoint/data artifacts
 *.bin
