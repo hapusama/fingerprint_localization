@@ -9,12 +9,12 @@ The code is split into two main areas:
   hand-written helper scripts for USRP B210/B200 receive probes, chirp TX/RX,
   spectrogram rendering, matched-filter analysis, and synthetic-bandwidth
   multipath sounding.
-- `fingerprint_localization/`: curated packet-feature CSV datasets for LoRa
-  fingerprint-localization analysis. The current repo contains data and
-  documentation, not the upstream feature-extraction script.
+- `fingerprint_localization/`: LoRa localization data, model implementations,
+  source-safe experiments, paper figures, and handoff documentation. The
+  upstream raw-IQ feature extractor is still not included.
 
-There is currently no `.git` directory at the workspace root. Do not assume Git
-metadata, branches, or history are available unless one is added later.
+This directory is the Git repository root. Its parent directory is a separate
+legacy worktree, so run Git commands here and do not stage from the parent.
 
 ## Environment
 

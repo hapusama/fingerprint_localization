@@ -1,0 +1,71 @@
+{
+  "protocol": "Stage1=A4.6. Stage2 enumerates fixed rescue rules and selects order/ranker using train+val only.",
+  "selected_rule_order": [
+    "F_knnmfr_trans05",
+    "B_v43raw_score0"
+  ],
+  "selected_ranker": "score",
+  "selection_key": [
+    8,
+    60,
+    1,
+    0,
+    2060,
+    -4,
+    -2,
+    "F_knnmfr_trans05;B_v43raw_score0"
+  ],
+  "final": [
+    {
+      "method": "aco_v47_selected",
+      "split": "train_loocv",
+      "packet_count": 2230,
+      "candidate_oracle_correct": 2134,
+      "candidate_oracle_accuracy": 0.95695067264574,
+      "stage1_correct": 2053,
+      "stage1_accuracy": 0.920627802690583,
+      "final_correct": 2060,
+      "final_accuracy": 0.9237668161434978,
+      "trigger_count": 16,
+      "W2R": 11,
+      "R2W": 4,
+      "net_gain": 7,
+      "rule_order": "F_knnmfr_trans05;B_v43raw_score0",
+      "ranker": "score"
+    },
+    {
+      "method": "aco_v47_selected",
+      "split": "val",
+      "packet_count": 73,
+      "candidate_oracle_correct": 63,
+      "candidate_oracle_accuracy": 0.863013698630137,
+      "stage1_correct": 59,
+      "stage1_accuracy": 0.8082191780821918,
+      "final_correct": 60,
+      "final_accuracy": 0.821917808219178,
+      "trigger_count": 4,
+      "W2R": 1,
+      "R2W": 0,
+      "net_gain": 1,
+      "rule_order": "F_knnmfr_trans05;B_v43raw_score0",
+      "ranker": "score"
+    },
+    {
+      "method": "aco_v47_selected",
+      "split": "test",
+      "packet_count": 74,
+      "candidate_oracle_correct": 65,
+      "candidate_oracle_accuracy": 0.8783783783783784,
+      "stage1_correct": 63,
+      "stage1_accuracy": 0.8513513513513513,
+      "final_correct": 62,
+      "final_accuracy": 0.8378378378378378,
+      "trigger_count": 2,
+      "W2R": 0,
+      "R2W": 1,
+      "net_gain": -1,
+      "rule_order": "F_knnmfr_trans05;B_v43raw_score0",
+      "ranker": "score"
+    }
+  ]
+}

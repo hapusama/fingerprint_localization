@@ -1,0 +1,2 @@
+file_name,packet_index,true_label,main_pred,main_correct,lora_only_pred,lora_only_correct,rssi_topk_candidates,main_Q_seg,lora_only_Q_seg,main_segment_cost_std,lora_only_segment_cost_std
+2_0_35_11_2_16.bin,1,0_35,0_35,1,1_26,0,1_26;1_25;0_35;1_23;1_28,0.977783369604553,0.9403605022563588,0.0005462044192169494,0.0014978679978509492

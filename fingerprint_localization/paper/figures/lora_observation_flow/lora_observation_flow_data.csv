@@ -1,0 +1,24 @@
+kind,id,source,target,label,x_in,y_in,width_in,height_in,branch,type
+node,tag,,,Commercial LoRa tag,0.25,1.24,0.78,0.58,input,device
+node,gateway,,,Single gateway,1.28,1.24,0.78,0.58,input,device
+node,packet,,,Standard LoRa packet,2.28,1.24,0.88,0.58,input,process
+node,demod,,,Packet demod.,3.55,0.55,0.78,0.5,rssi_plus,process
+node,rssi_snr,,,RSSI / SNR,4.55,0.55,0.78,0.5,rssi_plus,feature
+node,rssi_plus,,,RSSI+,5.55,0.55,0.68,0.5,rssi_plus,feature
+node,posterior,,,Location posterior,6.42,0.45,0.64,0.7,rssi_plus,output
+node,preamble,,,Preamble I/Q,3.55,2.03,0.78,0.5,spectrum,process
+node,dechirp,,,Dechirp,4.55,2.03,0.78,0.5,spectrum,process
+node,fft,,,FFT,5.55,2.03,0.68,0.5,spectrum,process
+node,shape,,,Center-bin spectrum,6.42,1.93,0.64,0.7,spectrum,output
+node,power_obs,,,Power-statistical observation,3.64,0.08,2.45,0.27,rssi_plus,annotation
+node,local_obs,,,Local propagation- structure observation,3.56,2.78,2.8,0.28,spectrum,annotation
+edge,edge_1,tag,gateway,,,,,,input,arrow
+edge,edge_2,gateway,packet,,,,,,input,arrow
+edge,edge_3,packet,demod,,,,,,rssi_plus,arrow
+edge,edge_4,demod,rssi_snr,,,,,,rssi_plus,arrow
+edge,edge_5,rssi_snr,rssi_plus,,,,,,rssi_plus,arrow
+edge,edge_6,rssi_plus,posterior,,,,,,rssi_plus,arrow
+edge,edge_7,packet,preamble,,,,,,spectrum,arrow
+edge,edge_8,preamble,dechirp,,,,,,spectrum,arrow
+edge,edge_9,dechirp,fft,,,,,,spectrum,arrow
+edge,edge_10,fft,shape,,,,,,spectrum,arrow

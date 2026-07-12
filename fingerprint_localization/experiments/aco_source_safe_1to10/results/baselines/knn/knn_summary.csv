@@ -1,0 +1,4 @@
+accuracy,correct,k,location_count,method,packet_count,split
+0.827354260089686,1845,3,32,knn,2230,train_loocv
+0.6986301369863014,51,3,29,knn,73,val
+0.6756756756756757,50,3,30,knn,74,test

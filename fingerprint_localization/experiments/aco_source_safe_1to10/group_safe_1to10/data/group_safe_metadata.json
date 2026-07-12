@@ -1,0 +1,43 @@
+{
+  "protocol": "Split original packet sources first; use 1:10 augmented copies only for train; val/test are original packets.",
+  "seed": 20260626,
+  "input_paths": {
+    "orig_rssi": "fingerprint_localization/data/mainline_202607/inputs/rssi_plus_packet_level_54points.csv",
+    "orig_raw": "fingerprint_localization/data/mainline_202607/inputs/lora_frequency_s17_54points.csv",
+    "orig_spectrum": "fingerprint_localization/data/mainline_202607/external/subbin_spectrum_long.csv",
+    "noisy_rssi": "fingerprint_localization/experiments/aco_source_safe_1to10/data/noisy_rssi_plus_packet_level_54points.csv",
+    "noisy_raw": "fingerprint_localization/experiments/aco_source_safe_1to10/data/noisy_lora_frequency_s17_54points.csv",
+    "noisy_spectrum": "fingerprint_localization/experiments/aco_source_safe_1to10/data/noisy_subbin_spectrum_long.csv"
+  },
+  "output_paths": {
+    "rssi": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/noisy_rssi_plus_packet_level_54points.csv",
+    "raw": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/noisy_lora_frequency_s17_54points.csv",
+    "spectrum": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/noisy_subbin_spectrum_long.csv",
+    "split": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/split_assignments.csv",
+    "source_split": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/source_packet_split.csv"
+  },
+  "source_packet_counts": {
+    "train": 223,
+    "val": 73,
+    "test": 74
+  },
+  "row_counts": {
+    "rssi": 2377,
+    "raw": 2377,
+    "spectrum": 836704,
+    "split_assignments": 2377,
+    "train_assignments": 2230,
+    "val_assignments": 73,
+    "test_assignments": 74
+  },
+  "location_counts": {
+    "train": 32,
+    "val": 29,
+    "test": 30
+  },
+  "source_overlap": {
+    "train_val": 0,
+    "train_test": 0,
+    "val_test": 0
+  }
+}

@@ -1,8 +1,25 @@
 # fingerprint_localization
 
-本仓库当前重点是 `dong` 目录里的 CHIME-style LFM chirp sounding 实验链路：TX 用 USRP B210 发重复 chirp，RX 同步采集 IQ 并保存到本地 `.bin` 文件，后续用频谱图或匹配滤波做多径/路径分析。
+本仓库包含 LoRa 指纹定位论文实验与 `dong/` 下的 USRP 宽带 chirp 采集链路。
+2026-06-23 之后的论文主线是 source-safe、chirp-assisted ACO v4；硬件链路是其
+离线 chirp 数据来源，不是在线定位输入。
 
-## 当前实验配置
+## 论文实验主线（先读）
+
+- 搭档交接入口：`fingerprint_localization/HANDOFF.md`
+- 完整时间线和复现命令：
+  `fingerprint_localization/docs/mainline_202607/EXPERIMENT_MAINLINE_SINCE_20260623.md`
+- 数据清单：`fingerprint_localization/docs/mainline_202607/DATA_MANIFEST.csv`
+- 主线代码：`fingerprint_localization/experiments/aco_source_safe_1to10/`
+
+最终冻结配置为 ACO v4 `top_k=5, rssi_class_k=3`，先在独立 validation
+选参，再合并 train+val refit；74 个未增强、零 source overlap 的 test packet 上
+结果为 `67/74 = 90.54%`。旧的增强后切分结果存在同源副本跨集合问题，
+只能作为历史记录。
+
+## SDR 采集链路（6 月上旬）
+
+### 当前实验配置
 
 当前 `dong/TX` 和 `dong/RX` 已切到 20 MS/s 宽带实验配置：
 

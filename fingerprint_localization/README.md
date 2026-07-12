@@ -1,5 +1,7 @@
 # Fingerprint Localization 数据说明
 
+INFOCOM 2027 当前主线、数据下载和接续实验说明见 `HANDOFF.md`。
+
 本目录用于保存 LoRa 指纹定位实验的离线特征数据。当前数据位于
 `data/packet_features_analysis/`，每个 CSV 文件是一组已经整理过的
 `packet_features.csv` 结果，每一行对应一个被成功检测并完成特征提取的 LoRa 数据包。

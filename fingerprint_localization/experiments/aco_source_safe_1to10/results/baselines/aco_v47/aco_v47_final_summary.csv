@@ -1,0 +1,4 @@
+method,split,packet_count,candidate_oracle_correct,candidate_oracle_accuracy,stage1_correct,stage1_accuracy,final_correct,final_accuracy,trigger_count,W2R,R2W,net_gain,rule_order,ranker
+aco_v47_selected,train_loocv,2230,2134,0.95695067264574,2053,0.920627802690583,2060,0.9237668161434978,16,11,4,7,F_knnmfr_trans05;B_v43raw_score0,score
+aco_v47_selected,val,73,63,0.863013698630137,59,0.8082191780821918,60,0.821917808219178,4,1,0,1,F_knnmfr_trans05;B_v43raw_score0,score
+aco_v47_selected,test,74,65,0.8783783783783784,63,0.8513513513513513,62,0.8378378378378378,2,0,1,-1,F_knnmfr_trans05;B_v43raw_score0,score

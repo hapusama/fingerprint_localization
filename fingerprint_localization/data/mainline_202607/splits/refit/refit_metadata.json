@@ -1,0 +1,20 @@
+{
+  "protocol": "Final refit dataset: train uses original train+val source packets with 1:10 augmentation; test remains original source packets. Validation rows are retained only for diagnostics and are not independent of train.",
+  "source_split_path": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/source_packet_split.csv",
+  "source_counts": {
+    "train_refit": 296,
+    "test": 74
+  },
+  "row_counts": {
+    "train": 2960,
+    "val": 73,
+    "test": 74
+  },
+  "test_source_overlap_with_train": 0,
+  "paths": {
+    "rssi": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_trainval_refit/data/noisy_rssi_plus_packet_level_54points.csv",
+    "raw": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_trainval_refit/data/noisy_lora_frequency_s17_54points.csv",
+    "spectrum": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_trainval_refit/data/noisy_subbin_spectrum_long.csv",
+    "split": "fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_trainval_refit/data/split_assignments.csv"
+  }
+}

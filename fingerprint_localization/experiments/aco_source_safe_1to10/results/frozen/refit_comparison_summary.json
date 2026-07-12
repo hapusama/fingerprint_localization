@@ -1,0 +1,66 @@
+{
+  "items": [
+    {
+      "method": "RSSI+ KNN (source-safe)",
+      "correct": "50",
+      "accuracy": 0.6756756756756757
+    },
+    {
+      "method": "ACO v4 top3 k3 (source-safe)",
+      "correct": "63",
+      "accuracy": 0.8513513513513513
+    },
+    {
+      "method": "ACO v4.7 two-stage (source-safe)",
+      "correct": "62",
+      "accuracy": 0.8378378378378378
+    },
+    {
+      "method": "ACO v4 top5 k3 + trainval refit",
+      "correct": "67",
+      "accuracy": 0.9054054054054054
+    }
+  ],
+  "fix": 4,
+  "break": 0,
+  "net": 4,
+  "fixed_examples": [
+    [
+      [
+        "2_0_35_11_2_16.bin",
+        "1"
+      ],
+      "1_26",
+      "0_35",
+      "0_35"
+    ],
+    [
+      [
+        "2_0_36_11_2_16.bin",
+        "13"
+      ],
+      "0_37",
+      "0_36",
+      "0_36"
+    ],
+    [
+      [
+        "2_1_20_11_2_16.bin",
+        "11"
+      ],
+      "0_42",
+      "1_20",
+      "1_20"
+    ],
+    [
+      [
+        "2_1_23_11_2_16.bin",
+        "11"
+      ],
+      "0_42",
+      "1_23",
+      "1_23"
+    ]
+  ],
+  "broken_examples": []
+}

@@ -51,5 +51,5 @@ corridor_id,location_id,position_key,c_i（NLOS-2，LOS-1，OLOS-0）,o_i(1=有�
 2,11,2_11,2,0,72.19,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m
 2,12,2_12,2,0,68.8,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m
 2,13,2_13,2,0,65.41,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m
-2,14,2_14,2,0,62.02,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m
+2,14,2_14,0,0,62.02,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m
 2,15,2_15,2,0,58.63,topology_rule_from_sampling_map,3.39,connected through corridor 1; d15 = d16 + spacing_m

@@ -1,0 +1,97 @@
+{
+  "input_dir": "v2_output/20260626_chirp_lora_bin_projection",
+  "point_count": 15,
+  "pair_count": 105,
+  "points": [
+    "0_34",
+    "0_36",
+    "0_38",
+    "0_40",
+    "0_42",
+    "0_44",
+    "1_16",
+    "1_18",
+    "1_20",
+    "1_22",
+    "1_24",
+    "1_26",
+    "1_28",
+    "1_30",
+    "1_32"
+  ],
+  "permutations": 10000,
+  "summary": [
+    {
+      "distance_metric": "mag_cosine_distance",
+      "correlation_method": "spearman",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": 0.1057744142649803,
+      "mantel_p_one_sided_positive": 0.208979102089791,
+      "mantel_p_two_sided_abs": 0.5827417258274172,
+      "null_mean": -0.032840537010160126,
+      "null_q025": -0.3037943188886585,
+      "null_q975": 0.3294318888658511
+    },
+    {
+      "distance_metric": "mag_cosine_distance",
+      "correlation_method": "pearson",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": 0.10640715637079506,
+      "mantel_p_one_sided_positive": 0.24687531246875313,
+      "mantel_p_two_sided_abs": 0.6912308769123088,
+      "null_mean": -0.019181986898940653,
+      "null_q025": -0.22334318472963316,
+      "null_q975": 0.3523937672464345
+    },
+    {
+      "distance_metric": "rel_db_pearson_distance",
+      "correlation_method": "spearman",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": 0.007339829981339415,
+      "mantel_p_one_sided_positive": 0.407959204079592,
+      "mantel_p_two_sided_abs": 0.9666033396660334,
+      "null_mean": -0.011114602944225787,
+      "null_q025": -0.2600456147625959,
+      "null_q975": 0.33993365125440594
+    },
+    {
+      "distance_metric": "rel_db_pearson_distance",
+      "correlation_method": "pearson",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": -0.03193745790575808,
+      "mantel_p_one_sided_positive": 0.5371462853714628,
+      "mantel_p_two_sided_abs": 0.8361163883611639,
+      "null_mean": 0.010518506183004388,
+      "null_q025": -0.2210464130660074,
+      "null_q975": 0.4242987960537952
+    },
+    {
+      "distance_metric": "rel_db_euclidean_distance",
+      "correlation_method": "spearman",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": 0.1317022600041468,
+      "mantel_p_one_sided_positive": 0.1591840815918408,
+      "mantel_p_two_sided_abs": 0.43145685431456854,
+      "null_mean": -0.0282226352892388,
+      "null_q025": -0.26658718639850715,
+      "null_q975": 0.30170018660584697
+    },
+    {
+      "distance_metric": "rel_db_euclidean_distance",
+      "correlation_method": "pearson",
+      "point_count": 15,
+      "pair_count": 105,
+      "correlation": 0.13713832241431292,
+      "mantel_p_one_sided_positive": 0.1496850314968503,
+      "mantel_p_two_sided_abs": 0.3631636836316368,
+      "null_mean": -0.01170577890260221,
+      "null_q025": -0.25583194974853785,
+      "null_q975": 0.3374587772480124
+    }
+  ]
+}

@@ -1,6 +1,57 @@
 # Generated SDR waveform/capture artifacts. Keep these local; they are often huge.
 *.bin
 dong/data_analysis/
+dong/inputs/
+dong/outputs/captures/
+
+# Raw captures and known-invalid experiment branches are local archives, not Git data.
+INFOCOM_origin_data/
+v2_output_wrong/
+fingerprint_localization/model/v2/rerun_20260622/
+
+# Local pre-migration experiment archives. Curated files live under fingerprint_localization/.
+/gaussian_noise_1to10_split/
+/v2_output/
+/dist/
+
+# Rebuildable or externally published large tabular artifacts.
+v2_output/**/subbin_spectrum_long.csv
+gaussian_noise_1to10_split/data/*.csv
+gaussian_noise_1to10_split/group_safe_1to10/data/noisy_*.csv
+gaussian_noise_1to10_split/group_safe_trainval_refit/data/noisy_*.csv
+
+# The pre-source-safe result tree is historical and fully reproducible.
+gaussian_noise_1to10_split/results/
+
+# Keep compact CSV/JSON evidence, not duplicated previews or workbooks.
+v2_output/**/*.png
+v2_output/**/*.svg
+v2_output/**/*.pdf
+v2_output/**/*.xlsx
+v2_output/**/*.html
+v2_output/**/*.npz
+
+# Detailed diagnostics are reproducible but too large/noisy for the source repository.
+**/*_segment_costs.csv
+**/*_candidate_scores.csv
+**/*candidate_features*.csv
+**/method_candidate_features*.csv
+**/selection_summary.csv
+**/packet_challenger_features.csv
+**/train_loocv_predictions.csv
+**/*.inspect.ndjson
+**/cache_complex_cir/
+fingerprint_localization/model/v3/output*/
+fingerprint_localization/model/v3/**/output*/
+fingerprint_localization/model/v3/aco_v2_ml/output*/
+fingerprint_localization/model/v4/output*/
+fingerprint_localization/experiments/baselines/bayesian_inversion/output/
+
+# Downloaded mainline release data.
+fingerprint_localization/data/mainline_202607/external/*.csv
+fingerprint_localization/experiments/aco_source_safe_1to10/data/*.csv
+fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_1to10/data/noisy_*.csv
+fingerprint_localization/experiments/aco_source_safe_1to10/group_safe_trainval_refit/data/noisy_*.csv
 
 # Archive/OS metadata noise
 .DS_Store
@@ -9,3 +60,8 @@ __MACOSX/
 # Python/runtime noise
 __pycache__/
 *.py[cod]
+
+# Model/runtime artifacts.
+*.pth
+*.pt
+*.ckpt
