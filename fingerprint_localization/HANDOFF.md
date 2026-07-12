@@ -10,11 +10,12 @@
 
 ## 获取数据
 
-下载 Release `mainline-data-20260712` 中的
-`fingerloc-mainline-data-20260712.tar.gz`，在仓库根目录执行：
+数据包使用 Git LFS。安装 Git LFS 后，在仓库根目录执行：
 
 ```bash
-tar -xzf fingerloc-mainline-data-20260712.tar.gz --strip-components=1
+git lfs pull --include="fingerprint_localization/data/mainline_202607/fingerloc-mainline-data-20260712.tar.gz"
+tar -xzf fingerprint_localization/data/mainline_202607/fingerloc-mainline-data-20260712.tar.gz \
+  --strip-components=1
 python3 -B fingerprint_localization/scripts/verify_handoff.py --hash
 ```
 
