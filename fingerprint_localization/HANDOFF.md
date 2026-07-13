@@ -6,7 +6,7 @@
 - 协议：先按 source packet 划分；train 增强 1:10；validation/test 不增强。
 - validation 只用于选参；选参后合并 train+validation refit。
 - 最终 test：`67/74 = 90.54%`，test 与训练 source overlap 为 0。
-- LoRa-only 消融：`66/74`，chirp 只作为离线弱先验。
+
 
 ## 获取数据
 
@@ -29,11 +29,24 @@ python3 -B fingerprint_localization/scripts/verify_handoff.py --hash
 
 主线代码：`experiments/aco_source_safe_1to10/`。
 
-优先补齐：
+实验：
 
-1. final refit 协议下的 1-NN、KNN、PGAR、ACO v2。
-2. no-Score4、no-prior、no-stability、no-reliability 消融。
-3. final 74 包端到端时延与峰值内存。
+1. 外部基线
+-  KNN/probabilistic fingerprint； 
+-  Random Forest / SVM / MLP； 
+-  D-Trace RSSI+； 
+-  OrchLoc； 
+-  MC-LoRa。
+2. Solver 对比
+这是为了证明 ACO 不是随便选的：
+-  exhaustive search small-scale； 
+-  greedy segment selection； 
+-  weighted voting； 
+-  random search； 
+-  ACO。
+3. 参数敏感性与可扩展性。段数（4/8/16 段实验）、候选池大小 Top-k、一致性阈值、蚂蚁数/迭代数对精度和时延的影响曲线
+4. 消融实验。
+5. 性能试验、包端到端时延与峰值内存、计算复杂度。
 
 调参只运行 `train_loocv,val`；配置冻结后才运行 `test`。refit 数据中的
 73 条 `val` 已进入训练，只能作诊断，不能再作为独立 validation 成绩。
