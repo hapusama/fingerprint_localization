@@ -1,0 +1,13 @@
+split,stage,ablation,ablation_label,changed,full_W2R,full_R2W,full_net_gain,changed_both_wrong,mcnemar_exact_two_sided_p
+validation,search,average_cost,Average cost,3,2,1,1,0,1.0
+validation,final,average_cost,Average cost,16,6,7,-1,3,1.0
+validation,search,greedy_path,Greedy path,4,2,2,0,0,1.0
+validation,final,greedy_path,Greedy path,4,0,2,-2,2,0.5
+validation,search,no_pheromone,No pheromone,2,2,0,2,0,0.5
+validation,final,no_pheromone,No pheromone,10,3,4,-1,3,1.0
+formal_test,search,average_cost,Average cost,4,1,2,-1,1,1.0
+formal_test,final,average_cost,Average cost,15,8,7,1,0,1.0
+formal_test,search,greedy_path,Greedy path,3,2,0,2,1,0.5
+formal_test,final,greedy_path,Greedy path,2,2,0,2,0,0.5
+formal_test,search,no_pheromone,No pheromone,3,2,0,2,1,0.5
+formal_test,final,no_pheromone,No pheromone,8,3,5,-2,0,0.7265625

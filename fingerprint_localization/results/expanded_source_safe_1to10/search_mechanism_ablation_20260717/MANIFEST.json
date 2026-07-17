@@ -1,0 +1,189 @@
+{
+  "experiment": "EXPANDED_LDA_ACO_SEARCH_MECHANISM_ABLATION_20260717",
+  "status": "complete",
+  "protocol": {
+    "same_candidate_and_evidence": true,
+    "same_final_beta": 0.5,
+    "same_candidate_alpha": 0.3,
+    "methods": {
+      "average_cost": "negative mean C_obs; no path",
+      "greedy_path": "deterministic local path with dynamic switch penalty",
+      "no_pheromone": "same ant/iteration budget and heuristic; no tau channel or pheromone score",
+      "full_aco": "frozen ACO v4 plus Score4"
+    },
+    "perturbations": {
+      "preamble_missing": [
+        1.0,
+        2.0,
+        4.0
+      ],
+      "amplitude_noise": [
+        0.05,
+        0.1,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "cfo_shift": [
+        0.25,
+        0.5,
+        1.0
+      ],
+      "segment_anomaly": [
+        0.25,
+        0.5,
+        1.0
+      ]
+    },
+    "formal_test_status": "exploratory because Expanded formal test was previously inspected"
+  },
+  "checks": {
+    "full_aco_reference_mismatches": 0,
+    "validation_packets": 128,
+    "formal_packets_per_scenario": 128,
+    "prediction_rows": 7680
+  },
+  "validation_clean": [
+    {
+      "scenario_type": "validation_clean",
+      "condition": "clean",
+      "severity": "clean",
+      "strength": 0.0,
+      "method": "average_cost",
+      "method_label": "Average cost",
+      "packets": 128,
+      "candidate_recall": 0.9921875,
+      "search_correct": 117,
+      "search_accuracy": 0.9140625,
+      "search_topology_mae_m": 0.4459375,
+      "search_topology_p95_m": 3.3900000000000006,
+      "final_correct": 118,
+      "final_accuracy": 0.921875,
+      "final_topology_mae_m": 0.523671875,
+      "final_topology_p95_m": 3.3900000000000006,
+      "severe_error_rate": 0.03125,
+      "prediction_changes_vs_lda": 1,
+      "beneficial_corrections": 1,
+      "harmful_corrections": 0,
+      "changed_but_still_wrong": 0,
+      "correction_precision": 1.0,
+      "mean_search_runtime_ms": 0.0012808984377055133,
+      "p95_search_runtime_ms": 0.0015956000030570288,
+      "mean_path_switches": "",
+      "mean_garbage_segments": ""
+    },
+    {
+      "scenario_type": "validation_clean",
+      "condition": "clean",
+      "severity": "clean",
+      "strength": 0.0,
+      "method": "greedy_path",
+      "method_label": "Greedy path",
+      "packets": 128,
+      "candidate_recall": 0.9921875,
+      "search_correct": 117,
+      "search_accuracy": 0.9140625,
+      "search_topology_mae_m": 0.4459375,
+      "search_topology_p95_m": 3.3900000000000006,
+      "final_correct": 116,
+      "final_accuracy": 0.90625,
+      "final_topology_mae_m": 0.576640625,
+      "final_topology_p95_m": 3.3900000000000006,
+      "severe_error_rate": 0.03125,
+      "prediction_changes_vs_lda": 5,
+      "beneficial_corrections": 2,
+      "harmful_corrections": 3,
+      "changed_but_still_wrong": 0,
+      "correction_precision": 0.4,
+      "mean_search_runtime_ms": 0.08259565625035048,
+      "p95_search_runtime_ms": 0.09755185000237532,
+      "mean_path_switches": 0.0,
+      "mean_garbage_segments": 0.0
+    },
+    {
+      "scenario_type": "validation_clean",
+      "condition": "clean",
+      "severity": "clean",
+      "strength": 0.0,
+      "method": "no_pheromone",
+      "method_label": "No pheromone",
+      "packets": 128,
+      "candidate_recall": 0.9921875,
+      "search_correct": 117,
+      "search_accuracy": 0.9140625,
+      "search_topology_mae_m": 0.4459375,
+      "search_topology_p95_m": 3.3900000000000006,
+      "final_correct": 117,
+      "final_accuracy": 0.9140625,
+      "final_topology_mae_m": 0.55015625,
+      "final_topology_p95_m": 3.3900000000000006,
+      "severe_error_rate": 0.03125,
+      "prediction_changes_vs_lda": 2,
+      "beneficial_corrections": 1,
+      "harmful_corrections": 1,
+      "changed_but_still_wrong": 0,
+      "correction_precision": 0.5,
+      "mean_search_runtime_ms": 4.761749015625261,
+      "p95_search_runtime_ms": 5.006652299999814,
+      "mean_path_switches": 0.0,
+      "mean_garbage_segments": 0.0
+    },
+    {
+      "scenario_type": "validation_clean",
+      "condition": "clean",
+      "severity": "clean",
+      "strength": 0.0,
+      "method": "full_aco",
+      "method_label": "Full ACO",
+      "packets": 128,
+      "candidate_recall": 0.9921875,
+      "search_correct": 117,
+      "search_accuracy": 0.9140625,
+      "search_topology_mae_m": 0.4459375,
+      "search_topology_p95_m": 3.3900000000000006,
+      "final_correct": 117,
+      "final_accuracy": 0.9140625,
+      "final_topology_mae_m": 0.4459375,
+      "final_topology_p95_m": 3.3900000000000006,
+      "severe_error_rate": 0.015625,
+      "prediction_changes_vs_lda": 7,
+      "beneficial_corrections": 3,
+      "harmful_corrections": 3,
+      "changed_but_still_wrong": 1,
+      "correction_precision": 0.42857142857142855,
+      "mean_search_runtime_ms": 5.0017301562495495,
+      "p95_search_runtime_ms": 5.269524899999567,
+      "mean_path_switches": 0.0,
+      "mean_garbage_segments": 0.0
+    }
+  ],
+  "diagnostic_thresholds": {
+    "detect_score_db": {
+      "q25": 2.7651140689849854,
+      "q50": 5.423491716384888,
+      "q75": 8.254794359207153
+    },
+    "snr": {
+      "q25": 8.0,
+      "q50": 9.0,
+      "q75": 9.0
+    },
+    "segment_cost_std": {
+      "q25": 0.0006427756925840823,
+      "q50": 0.0020341939894012516,
+      "q75": 0.0042885497277126905
+    }
+  },
+  "plots": [
+    "ablation_final_accuracy.png",
+    "ablation_search_accuracy.png",
+    "full_vs_no_pheromone_delta.png",
+    "ablation_clean_runtime.png"
+  ],
+  "input_sha256": {
+    "weakness_predictions": "d76fd64c55152785738df25c2370742616988562ecdb92aebba35e2780f01c43",
+    "formal_model": "e083ac8213fb15f7bb50f802d6e2565fb7b82bfe202dcf16eb1bfef774f230a9",
+    "validation_model": "fc7e6e4600367ad40e26c294857b0cd88ff5be970c1de1b269dcdb4e06704be1"
+  },
+  "plotter": "plot_search_mechanism_ablation.py"
+}

@@ -1,0 +1,88 @@
+scenario_type,condition,severity,strength,method,packets,correct,accuracy,topology_mae_m,topology_p95_m,severe_error_threshold_m,severe_error_count,severe_error_rate,prediction_changes_vs_lda,correction_coverage,beneficial_corrections,harmful_corrections,changed_but_still_wrong,correction_precision
+artificial_perturbation,preamble_missing,clean,0.0,LDA,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,clean,0.0,Fixed fusion,128,120,0.9375,0.3664843750000001,3.3900000000000006,10.0,1,0.0078125,4,0.03125,2,2,0,0.5
+artificial_perturbation,preamble_missing,clean,0.0,Gated ACO,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,level_1,1.0,LDA,128,119,0.9296875,0.34171875000000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,level_1,1.0,Fixed fusion,128,117,0.9140625,0.4450781250000001,3.3900000000000006,10.0,1,0.0078125,4,0.03125,1,3,0,0.25
+artificial_perturbation,preamble_missing,level_1,1.0,Gated ACO,128,119,0.9296875,0.34171875000000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,level_2,2.0,LDA,128,112,0.875,0.5766406250000001,3.3900000000000006,10.0,2,0.015625,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,level_2,2.0,Fixed fusion,128,114,0.890625,0.5492968750000001,3.3900000000000006,10.0,2,0.015625,8,0.0625,5,3,0,0.625
+artificial_perturbation,preamble_missing,level_2,2.0,Gated ACO,128,113,0.8828125,0.5501562500000001,3.3900000000000006,10.0,2,0.015625,1,0.0078125,1,0,0,1.0
+artificial_perturbation,preamble_missing,level_3,4.0,LDA,128,98,0.765625,1.02171875,5.521999999999974,10.0,2,0.015625,0,0.0,0,0,0,
+artificial_perturbation,preamble_missing,level_3,4.0,Fixed fusion,128,106,0.828125,0.7594531250000002,3.3900000000000006,10.0,2,0.015625,13,0.1015625,9,1,3,0.6923076923076923
+artificial_perturbation,preamble_missing,level_3,4.0,Gated ACO,128,100,0.78125,0.9704687500000001,5.521999999999974,10.0,2,0.015625,2,0.015625,2,0,0,1.0
+artificial_perturbation,amplitude_noise,clean,0.0,LDA,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,clean,0.0,Fixed fusion,128,120,0.9375,0.3664843750000001,3.3900000000000006,10.0,1,0.0078125,4,0.03125,2,2,0,0.5
+artificial_perturbation,amplitude_noise,clean,0.0,Gated ACO,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_1,0.05,LDA,128,115,0.8984375,0.5510156250000001,3.3900000000000006,10.0,2,0.015625,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_1,0.05,Fixed fusion,128,119,0.9296875,0.3673437500000001,3.3900000000000006,10.0,1,0.0078125,7,0.0546875,5,1,1,0.7142857142857143
+artificial_perturbation,amplitude_noise,level_1,0.05,Gated ACO,128,117,0.9140625,0.4203125000000001,3.3900000000000006,10.0,1,0.0078125,2,0.015625,2,0,0,1.0
+artificial_perturbation,amplitude_noise,level_2,0.1,LDA,128,107,0.8359375,0.8696875000000001,5.521999999999971,10.0,4,0.03125,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_2,0.1,Fixed fusion,128,110,0.859375,0.7372656250000001,3.3900000000000006,10.0,3,0.0234375,11,0.0859375,7,4,0,0.6363636363636364
+artificial_perturbation,amplitude_noise,level_2,0.1,Gated ACO,128,108,0.84375,0.8423437500000002,5.521999999999971,10.0,4,0.03125,3,0.0234375,2,1,0,0.6666666666666666
+artificial_perturbation,amplitude_noise,level_3,0.25,LDA,128,69,0.5390625,2.906406249999999,13.45,10.0,13,0.1015625,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_3,0.25,Fixed fusion,128,78,0.609375,2.272499999999999,10.170000000000002,10.0,11,0.0859375,22,0.171875,11,2,9,0.5
+artificial_perturbation,amplitude_noise,level_3,0.25,Gated ACO,128,72,0.5625,2.8021874999999987,13.45,10.0,13,0.1015625,4,0.03125,3,0,1,0.75
+artificial_perturbation,amplitude_noise,level_4,0.5,LDA,128,43,0.3359375,5.155859374999996,16.9115,10.0,31,0.2421875,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_4,0.5,Fixed fusion,128,52,0.40625,4.549296874999998,16.9115,10.0,26,0.203125,28,0.21875,11,2,15,0.39285714285714285
+artificial_perturbation,amplitude_noise,level_4,0.5,Gated ACO,128,42,0.328125,5.102890624999996,16.9115,10.0,30,0.234375,3,0.0234375,0,1,2,0.0
+artificial_perturbation,amplitude_noise,level_5,1.0,LDA,128,21,0.1640625,10.656015625,27.081500000000002,10.0,67,0.5234375,0,0.0,0,0,0,
+artificial_perturbation,amplitude_noise,level_5,1.0,Fixed fusion,128,23,0.1796875,10.710703124999993,27.01,10.0,67,0.5234375,21,0.1640625,2,0,19,0.09523809523809523
+artificial_perturbation,amplitude_noise,level_5,1.0,Gated ACO,128,21,0.1640625,10.708124999999997,27.081500000000002,10.0,66,0.515625,3,0.0234375,0,0,3,0.0
+artificial_perturbation,cfo_shift,clean,0.0,LDA,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,cfo_shift,clean,0.0,Fixed fusion,128,120,0.9375,0.3664843750000001,3.3900000000000006,10.0,1,0.0078125,4,0.03125,2,2,0,0.5
+artificial_perturbation,cfo_shift,clean,0.0,Gated ACO,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,cfo_shift,level_1,0.25,LDA,128,116,0.90625,0.4211718750000001,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,cfo_shift,level_1,0.25,Fixed fusion,128,113,0.8828125,0.5501562500000001,3.3900000000000006,10.0,1,0.0078125,6,0.046875,1,4,1,0.16666666666666666
+artificial_perturbation,cfo_shift,level_1,0.25,Gated ACO,128,114,0.890625,0.4732812500000001,3.3900000000000006,10.0,1,0.0078125,2,0.015625,0,2,0,0.0
+artificial_perturbation,cfo_shift,level_2,0.5,LDA,128,107,0.8359375,0.7603125000000002,5.521999999999974,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,cfo_shift,level_2,0.5,Fixed fusion,128,109,0.8515625,0.6560937500000001,3.3900000000000006,10.0,1,0.0078125,10,0.078125,5,3,2,0.5
+artificial_perturbation,cfo_shift,level_2,0.5,Gated ACO,128,105,0.8203125,0.8124218750000002,5.521999999999974,10.0,1,0.0078125,5,0.0390625,1,3,1,0.2
+artificial_perturbation,cfo_shift,level_3,1.0,LDA,128,99,0.7734375,1.2028125000000005,6.670000000000002,10.0,4,0.03125,0,0.0,0,0,0,
+artificial_perturbation,cfo_shift,level_3,1.0,Fixed fusion,128,102,0.796875,1.0208593750000001,6.670000000000002,10.0,1,0.0078125,12,0.09375,6,3,3,0.5
+artificial_perturbation,cfo_shift,level_3,1.0,Gated ACO,128,99,0.7734375,1.1242187500000003,6.670000000000002,10.0,3,0.0234375,5,0.0390625,2,2,1,0.4
+artificial_perturbation,segment_anomaly,clean,0.0,LDA,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,clean,0.0,Fixed fusion,128,120,0.9375,0.3664843750000001,3.3900000000000006,10.0,1,0.0078125,4,0.03125,2,2,0,0.5
+artificial_perturbation,segment_anomaly,clean,0.0,Gated ACO,128,120,0.9375,0.31523437500000007,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,level_1,0.25,LDA,128,118,0.921875,0.3682031250000001,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,level_1,0.25,Fixed fusion,128,118,0.921875,0.3938281250000001,3.3900000000000006,10.0,1,0.0078125,5,0.0390625,2,2,1,0.4
+artificial_perturbation,segment_anomaly,level_1,0.25,Gated ACO,128,118,0.921875,0.3682031250000001,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,level_2,0.5,LDA,128,118,0.921875,0.3938281250000001,3.3900000000000006,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,level_2,0.5,Fixed fusion,128,113,0.8828125,0.5501562500000001,3.3900000000000006,10.0,1,0.0078125,5,0.0390625,0,5,0,0.0
+artificial_perturbation,segment_anomaly,level_2,0.5,Gated ACO,128,117,0.9140625,0.4203125000000001,3.3900000000000006,10.0,1,0.0078125,1,0.0078125,0,1,0,0.0
+artificial_perturbation,segment_anomaly,level_3,1.0,LDA,128,107,0.8359375,0.8610937500000002,6.670000000000001,10.0,1,0.0078125,0,0.0,0,0,0,
+artificial_perturbation,segment_anomaly,level_3,1.0,Fixed fusion,128,105,0.8203125,0.8884375000000002,6.670000000000002,10.0,2,0.015625,13,0.1015625,5,7,1,0.38461538461538464
+artificial_perturbation,segment_anomaly,level_3,1.0,Gated ACO,128,105,0.8203125,0.9917968750000002,6.670000000000002,10.0,2,0.015625,3,0.0234375,0,2,1,0.0
+diagnostic_group,detect_score_db,0_cleanest,validation_quartile,LDA,42,40,0.9523809523809523,0.16142857142857145,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,0_cleanest,validation_quartile,Fixed fusion,42,39,0.9285714285714286,0.39833333333333343,3.220499999999986,10.0,0,0.0,3,0.07142857142857142,1,2,0,0.3333333333333333
+diagnostic_group,detect_score_db,0_cleanest,validation_quartile,Gated ACO,42,40,0.9523809523809523,0.16142857142857145,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,1_mild,validation_quartile,LDA,25,25,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,1_mild,validation_quartile,Fixed fusion,25,25,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,1_mild,validation_quartile,Gated ACO,25,25,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,2_moderate,validation_quartile,LDA,30,30,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,2_moderate,validation_quartile,Fixed fusion,30,30,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,2_moderate,validation_quartile,Gated ACO,30,30,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,3_severe,validation_quartile,LDA,31,25,0.8064516129032258,1.082903225806452,6.670000000000002,10.0,1,0.03225806451612903,0,0.0,0,0,0,
+diagnostic_group,detect_score_db,3_severe,validation_quartile,Fixed fusion,31,26,0.8387096774193549,0.9735483870967743,6.670000000000002,10.0,1,0.03225806451612903,1,0.03225806451612903,1,0,0,1.0
+diagnostic_group,detect_score_db,3_severe,validation_quartile,Gated ACO,31,25,0.8064516129032258,1.082903225806452,6.670000000000002,10.0,1,0.03225806451612903,0,0.0,0,0,0,
+diagnostic_group,snr,0_cleanest,validation_quartile,LDA,23,23,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,snr,0_cleanest,validation_quartile,Fixed fusion,23,23,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,snr,0_cleanest,validation_quartile,Gated ACO,23,23,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,snr,2_moderate,validation_quartile,LDA,46,46,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,snr,2_moderate,validation_quartile,Fixed fusion,46,45,0.9782608695652174,0.14500000000000005,0.0,10.0,0,0.0,1,0.021739130434782608,0,1,0,0.0
+diagnostic_group,snr,2_moderate,validation_quartile,Gated ACO,46,46,1.0,0.0,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,snr,3_severe,validation_quartile,LDA,59,51,0.864406779661017,0.6838983050847459,3.717999999999982,10.0,1,0.01694915254237288,0,0.0,0,0,0,
+diagnostic_group,snr,3_severe,validation_quartile,Fixed fusion,59,52,0.8813559322033898,0.6820338983050849,6.670000000000002,10.0,1,0.01694915254237288,3,0.05084745762711865,2,1,0,0.6666666666666666
+diagnostic_group,snr,3_severe,validation_quartile,Gated ACO,59,51,0.864406779661017,0.6838983050847459,3.717999999999982,10.0,1,0.01694915254237288,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,0_cleanest,validation_quartile,LDA,26,25,0.9615384615384616,0.38692307692307687,0.0,10.0,1,0.038461538461538464,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,0_cleanest,validation_quartile,Fixed fusion,26,25,0.9615384615384616,0.38692307692307687,0.0,10.0,1,0.038461538461538464,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,0_cleanest,validation_quartile,Gated ACO,26,25,0.9615384615384616,0.38692307692307687,0.0,10.0,1,0.038461538461538464,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,1_mild,validation_quartile,LDA,33,32,0.9696969696969697,0.10272727272727275,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,1_mild,validation_quartile,Fixed fusion,33,32,0.9696969696969697,0.10272727272727275,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,1_mild,validation_quartile,Gated ACO,33,32,0.9696969696969697,0.10272727272727275,0.0,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,2_moderate,validation_quartile,LDA,28,25,0.8928571428571429,0.480357142857143,3.3900000000000006,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,2_moderate,validation_quartile,Fixed fusion,28,25,0.8928571428571429,0.480357142857143,3.3900000000000006,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,2_moderate,validation_quartile,Gated ACO,28,25,0.8928571428571429,0.480357142857143,3.3900000000000006,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,3_severe,validation_quartile,LDA,41,38,0.926829268292683,0.32804878048780495,3.3900000000000006,10.0,0,0.0,0,0.0,0,0,0,
+diagnostic_group,segment_cost_std,3_severe,validation_quartile,Fixed fusion,41,38,0.926829268292683,0.488048780487805,6.670000000000002,10.0,0,0.0,4,0.0975609756097561,2,2,0,0.5
+diagnostic_group,segment_cost_std,3_severe,validation_quartile,Gated ACO,41,38,0.926829268292683,0.32804878048780495,3.3900000000000006,10.0,0,0.0,0,0.0,0,0,0,

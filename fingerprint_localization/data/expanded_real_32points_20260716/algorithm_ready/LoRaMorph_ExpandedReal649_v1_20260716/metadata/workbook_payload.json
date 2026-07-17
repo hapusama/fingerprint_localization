@@ -1,0 +1,383 @@
+{
+  "summary": {
+    "dataset_version": "ExpandedReal-649-v1",
+    "created_date": "2026-07-16",
+    "protocol": "source-packet-safe physical 5-second slots; pooled unsplit dataset",
+    "sample_count": 649,
+    "position_count": 32,
+    "min_packets_per_position": 19,
+    "max_packets_per_position": 21,
+    "symbol_rows": 10384,
+    "array_shapes": {
+      "X_rssi": [
+        649,
+        6
+      ],
+      "X_rssi_s17": [
+        649,
+        27
+      ],
+      "X_pgar": [
+        649,
+        30
+      ],
+      "raw_symbol_mag": [
+        649,
+        16,
+        5
+      ],
+      "q4_symbol_db": [
+        649,
+        16,
+        17
+      ],
+      "q4_symbol_mag": [
+        649,
+        16,
+        17
+      ],
+      "y": [
+        649
+      ]
+    },
+    "q4_offsets": [
+      -2.0,
+      -1.75,
+      -1.5,
+      -1.25,
+      -1.0,
+      -0.75,
+      -0.5,
+      -0.25,
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0
+    ],
+    "split_status": "none",
+    "standardization_status": "unscaled; fit preprocessing on training sources only"
+  },
+  "labels": [
+    {
+      "label_id": 0,
+      "position_key": "0_33",
+      "corridor_id": 0,
+      "location_id": 33,
+      "packet_count": 20
+    },
+    {
+      "label_id": 1,
+      "position_key": "0_34",
+      "corridor_id": 0,
+      "location_id": 34,
+      "packet_count": 20
+    },
+    {
+      "label_id": 2,
+      "position_key": "0_35",
+      "corridor_id": 0,
+      "location_id": 35,
+      "packet_count": 20
+    },
+    {
+      "label_id": 3,
+      "position_key": "0_36",
+      "corridor_id": 0,
+      "location_id": 36,
+      "packet_count": 20
+    },
+    {
+      "label_id": 4,
+      "position_key": "0_37",
+      "corridor_id": 0,
+      "location_id": 37,
+      "packet_count": 21
+    },
+    {
+      "label_id": 5,
+      "position_key": "0_38",
+      "corridor_id": 0,
+      "location_id": 38,
+      "packet_count": 21
+    },
+    {
+      "label_id": 6,
+      "position_key": "0_39",
+      "corridor_id": 0,
+      "location_id": 39,
+      "packet_count": 20
+    },
+    {
+      "label_id": 7,
+      "position_key": "0_40",
+      "corridor_id": 0,
+      "location_id": 40,
+      "packet_count": 20
+    },
+    {
+      "label_id": 8,
+      "position_key": "0_42",
+      "corridor_id": 0,
+      "location_id": 42,
+      "packet_count": 19
+    },
+    {
+      "label_id": 9,
+      "position_key": "0_43",
+      "corridor_id": 0,
+      "location_id": 43,
+      "packet_count": 20
+    },
+    {
+      "label_id": 10,
+      "position_key": "0_44",
+      "corridor_id": 0,
+      "location_id": 44,
+      "packet_count": 20
+    },
+    {
+      "label_id": 11,
+      "position_key": "0_45",
+      "corridor_id": 0,
+      "location_id": 45,
+      "packet_count": 20
+    },
+    {
+      "label_id": 12,
+      "position_key": "0_48",
+      "corridor_id": 0,
+      "location_id": 48,
+      "packet_count": 19
+    },
+    {
+      "label_id": 13,
+      "position_key": "0_50",
+      "corridor_id": 0,
+      "location_id": 50,
+      "packet_count": 19
+    },
+    {
+      "label_id": 14,
+      "position_key": "1_16",
+      "corridor_id": 1,
+      "location_id": 16,
+      "packet_count": 21
+    },
+    {
+      "label_id": 15,
+      "position_key": "1_17",
+      "corridor_id": 1,
+      "location_id": 17,
+      "packet_count": 20
+    },
+    {
+      "label_id": 16,
+      "position_key": "1_18",
+      "corridor_id": 1,
+      "location_id": 18,
+      "packet_count": 21
+    },
+    {
+      "label_id": 17,
+      "position_key": "1_19",
+      "corridor_id": 1,
+      "location_id": 19,
+      "packet_count": 21
+    },
+    {
+      "label_id": 18,
+      "position_key": "1_20",
+      "corridor_id": 1,
+      "location_id": 20,
+      "packet_count": 20
+    },
+    {
+      "label_id": 19,
+      "position_key": "1_21",
+      "corridor_id": 1,
+      "location_id": 21,
+      "packet_count": 19
+    },
+    {
+      "label_id": 20,
+      "position_key": "1_22",
+      "corridor_id": 1,
+      "location_id": 22,
+      "packet_count": 21
+    },
+    {
+      "label_id": 21,
+      "position_key": "1_23",
+      "corridor_id": 1,
+      "location_id": 23,
+      "packet_count": 21
+    },
+    {
+      "label_id": 22,
+      "position_key": "1_24",
+      "corridor_id": 1,
+      "location_id": 24,
+      "packet_count": 21
+    },
+    {
+      "label_id": 23,
+      "position_key": "1_25",
+      "corridor_id": 1,
+      "location_id": 25,
+      "packet_count": 21
+    },
+    {
+      "label_id": 24,
+      "position_key": "1_26",
+      "corridor_id": 1,
+      "location_id": 26,
+      "packet_count": 20
+    },
+    {
+      "label_id": 25,
+      "position_key": "1_27",
+      "corridor_id": 1,
+      "location_id": 27,
+      "packet_count": 20
+    },
+    {
+      "label_id": 26,
+      "position_key": "1_28",
+      "corridor_id": 1,
+      "location_id": 28,
+      "packet_count": 20
+    },
+    {
+      "label_id": 27,
+      "position_key": "1_29",
+      "corridor_id": 1,
+      "location_id": 29,
+      "packet_count": 20
+    },
+    {
+      "label_id": 28,
+      "position_key": "1_30",
+      "corridor_id": 1,
+      "location_id": 30,
+      "packet_count": 21
+    },
+    {
+      "label_id": 29,
+      "position_key": "1_31",
+      "corridor_id": 1,
+      "location_id": 31,
+      "packet_count": 21
+    },
+    {
+      "label_id": 30,
+      "position_key": "1_32",
+      "corridor_id": 1,
+      "location_id": 32,
+      "packet_count": 21
+    },
+    {
+      "label_id": 31,
+      "position_key": "2_15",
+      "corridor_id": 2,
+      "location_id": 15,
+      "packet_count": 21
+    }
+  ],
+  "algorithms": {
+    "1-NN": {
+      "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi",
+      "shape": [
+        649,
+        6
+      ]
+    },
+    "KNN": {
+      "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi",
+      "shape": [
+        649,
+        6
+      ]
+    },
+    "RandomForest": {
+      "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+      "shape": [
+        649,
+        27
+      ]
+    },
+    "XGBoost": {
+      "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+      "shape": [
+        649,
+        27
+      ]
+    },
+    "MLP": {
+      "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+      "shape": [
+        649,
+        27
+      ]
+    },
+    "PGAR": {
+      "inputs": [
+        "inputs/rssi_plus_packet_level_32points_649.csv",
+        "inputs/lora_frequency_s17_32points_649.csv",
+        "inputs/subbin_spectrum_long_q1q4_32points_649.csv"
+      ]
+    },
+    "ACO_v2_v4": {
+      "inputs": [
+        "inputs/rssi_plus_packet_level_32points_649.csv",
+        "inputs/subbin_spectrum_long_q1q4_32points_649.csv",
+        "priors/chirp_template_measured_16points.csv",
+        "priors/chirp_structure_measured_16points.csv",
+        "priors/location_distance_54points.csv"
+      ],
+      "tensor_shapes": {
+        "raw_symbol_mag": [
+          649,
+          16,
+          5
+        ],
+        "q4_symbol_db": [
+          649,
+          16,
+          17
+        ]
+      }
+    }
+  },
+  "feature_groups": [
+    {
+      "group": "RSSI+",
+      "dimensions": 6,
+      "used_by": "1-NN, KNN, RF, XGBoost, MLP, PGAR, ACO"
+    },
+    {
+      "group": "S17 packet",
+      "dimensions": 21,
+      "used_by": "RF, XGBoost, MLP, PGAR"
+    },
+    {
+      "group": "PGAR packet",
+      "dimensions": 30,
+      "used_by": "PGAR / generic ML"
+    },
+    {
+      "group": "q1 symbol tensor",
+      "dimensions": "649x16x5",
+      "used_by": "ACO v2/v4"
+    },
+    {
+      "group": "q4 symbol tensor",
+      "dimensions": "649x16x17",
+      "used_by": "PGAR, ACO v2/v4"
+    }
+  ]
+}

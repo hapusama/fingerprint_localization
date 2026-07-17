@@ -1,0 +1,131 @@
+{
+  "experiment": "EXPANDED_LDA_ACO_CANDIDATE_RECALL_AND_CONTROLLED_WEAKNESS_20260716",
+  "status": "complete",
+  "seed": 20260626,
+  "protocol": {
+    "gate_selected_on": "validation only",
+    "formal_test_packets": 128,
+    "alpha": 0.3,
+    "beta": 0.5,
+    "severe_error_threshold_m": 10.0,
+    "test_status": "exploratory because Expanded formal test was previously inspected",
+    "active_perturbations": {
+      "preamble_missing": [
+        1.0,
+        2.0,
+        4.0
+      ],
+      "amplitude_noise": [
+        0.05,
+        0.1,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "cfo_shift": [
+        0.25,
+        0.5,
+        1.0
+      ],
+      "segment_anomaly": [
+        0.25,
+        0.5,
+        1.0
+      ]
+    },
+    "active_perturbation_scope": "deterministic feature-space proxy; raw IQ unavailable"
+  },
+  "candidate_recall": [
+    {
+      "split": "validation",
+      "packets": 128,
+      "rssi_top1_recall": 0.71875,
+      "rssi_top3_recall": 0.8984375,
+      "rssi_top5_recall": 0.953125,
+      "lda_top1_recall": 0.9140625,
+      "lda_top3_recall": 0.984375,
+      "lda_top5_recall": 1.0,
+      "fusion_top5_recall": 0.9921875,
+      "union_variable_recall": 1.0,
+      "union_length_mean": 6.7109375,
+      "union_length_min": 5,
+      "union_length_max": 10,
+      "candidate_truncation_unrecoverable_errors": 1,
+      "rssi_top1_count": 92,
+      "rssi_top3_count": 115,
+      "rssi_top5_count": 122,
+      "lda_top1_count": 117,
+      "lda_top3_count": 126,
+      "lda_top5_count": 128,
+      "fusion_top5_count": 127,
+      "union_variable_count": 128
+    },
+    {
+      "split": "formal_test",
+      "packets": 128,
+      "rssi_top1_recall": 0.6953125,
+      "rssi_top3_recall": 0.921875,
+      "rssi_top5_recall": 0.9453125,
+      "lda_top1_recall": 0.9375,
+      "lda_top3_recall": 1.0,
+      "lda_top5_recall": 1.0,
+      "fusion_top5_recall": 1.0,
+      "union_variable_recall": 1.0,
+      "union_length_mean": 6.734375,
+      "union_length_min": 5,
+      "union_length_max": 9,
+      "candidate_truncation_unrecoverable_errors": 0,
+      "rssi_top1_count": 89,
+      "rssi_top3_count": 118,
+      "rssi_top5_count": 121,
+      "lda_top1_count": 120,
+      "lda_top3_count": 128,
+      "lda_top5_count": 128,
+      "fusion_top5_count": 128,
+      "union_variable_count": 128
+    }
+  ],
+  "gate": {
+    "q_seg_threshold": 0.8483740225494738,
+    "correct": 119,
+    "accuracy": 0.9296875,
+    "accepted_corrections": 2,
+    "beneficial_corrections": 2,
+    "harmful_corrections": 0,
+    "changed_but_still_wrong": 0,
+    "correction_precision": 1.0
+  },
+  "clean_reproduction": {
+    "lda": 120,
+    "fixed": 120,
+    "gated": 120
+  },
+  "diagnostic_validation_quartiles": {
+    "detect_score_db": {
+      "q25": 2.7651140689849854,
+      "q50": 5.423491716384888,
+      "q75": 8.254794359207153
+    },
+    "snr": {
+      "q25": 8.0,
+      "q50": 9.0,
+      "q75": 9.0
+    },
+    "segment_cost_std": {
+      "q25": 0.0006427756925840823,
+      "q50": 0.0020341939894012516,
+      "q75": 0.0042885497277126905
+    }
+  },
+  "plots": [
+    "artificial_perturbation_accuracy.png",
+    "coverage_risk_strongest_perturbations.png",
+    "diagnostic_group_accuracy.png"
+  ],
+  "input_sha256": {
+    "formal_model": "e083ac8213fb15f7bb50f802d6e2565fb7b82bfe202dcf16eb1bfef774f230a9",
+    "validation_model": "fc7e6e4600367ad40e26c294857b0cd88ff5be970c1de1b269dcdb4e06704be1",
+    "formal_predictions": "838ca9ea86447208525ddd5f345e5b1008b23e0b46329d928cd46bae9632aff9",
+    "location_distance": "3a633a1e3f9580545c807bd7a98942072e9700a738ff87df391137ce64f7a360"
+  }
+}

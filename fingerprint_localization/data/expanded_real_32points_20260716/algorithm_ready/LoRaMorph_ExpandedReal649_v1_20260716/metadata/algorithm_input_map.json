@@ -1,0 +1,65 @@
+{
+  "1-NN": {
+    "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi",
+    "shape": [
+      649,
+      6
+    ]
+  },
+  "KNN": {
+    "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi",
+    "shape": [
+      649,
+      6
+    ]
+  },
+  "RandomForest": {
+    "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+    "shape": [
+      649,
+      27
+    ]
+  },
+  "XGBoost": {
+    "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+    "shape": [
+      649,
+      27
+    ]
+  },
+  "MLP": {
+    "input": "arrays/loramorph_expanded649_unscaled.npz::X_rssi_s17",
+    "shape": [
+      649,
+      27
+    ]
+  },
+  "PGAR": {
+    "inputs": [
+      "inputs/rssi_plus_packet_level_32points_649.csv",
+      "inputs/lora_frequency_s17_32points_649.csv",
+      "inputs/subbin_spectrum_long_q1q4_32points_649.csv"
+    ]
+  },
+  "ACO_v2_v4": {
+    "inputs": [
+      "inputs/rssi_plus_packet_level_32points_649.csv",
+      "inputs/subbin_spectrum_long_q1q4_32points_649.csv",
+      "priors/chirp_template_measured_16points.csv",
+      "priors/chirp_structure_measured_16points.csv",
+      "priors/location_distance_54points.csv"
+    ],
+    "tensor_shapes": {
+      "raw_symbol_mag": [
+        649,
+        16,
+        5
+      ],
+      "q4_symbol_db": [
+        649,
+        16,
+        17
+      ]
+    }
+  }
+}

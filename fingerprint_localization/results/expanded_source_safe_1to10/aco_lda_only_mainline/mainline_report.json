@@ -1,0 +1,84 @@
+{
+  "status": "ADOPTED_MAINLINE",
+  "method": "Standardized LDA(svd) prior + source-level ACO v4 + fixed-beta fusion",
+  "adoption_date": "2026-07-16",
+  "protocol": {
+    "dataset": "ExpandedReal-649-v1",
+    "seed": 20260626,
+    "source_split": {
+      "train": 393,
+      "validation": 128,
+      "test": 128
+    },
+    "formal_refit_sources": 521,
+    "formal_refit_rows": 5210,
+    "formal_test_packets": 128,
+    "source_overlap": 0,
+    "validation_and_test_augmentation": false,
+    "posterior_components": [
+      "lda_svd"
+    ],
+    "RF_used": false,
+    "alpha": 0.3,
+    "beta": 0.5,
+    "validation_T_seg": 0.009161130588433,
+    "formal_T_seg": 0.009034126697630788,
+    "ACO": {
+      "top_k": 5,
+      "rssi_class_k": 3,
+      "segments": 4,
+      "ants": 16,
+      "iterations": 12,
+      "elite_ants": 4
+    },
+    "test_status": "exploratory because the Expanded test was previously inspected"
+  },
+  "validation": {
+    "ml_top1_correct": 117,
+    "candidate_rank_top1_correct": 117,
+    "candidate_true_top5_recall": 0.9921875,
+    "aco_score4_correct": 117,
+    "final_correct": 117,
+    "final_accuracy": 0.9140625
+  },
+  "formal_test": {
+    "ml_top1_correct": 120,
+    "candidate_rank_top1_correct": 118,
+    "candidate_true_top5_recall": 1.0,
+    "aco_score4_correct": 118,
+    "final_correct": 120,
+    "final_accuracy": 0.9375
+  },
+  "comparisons_vs_historical_lda_rf": [
+    {
+      "split": "val",
+      "reference": "historical_lda_rf_equal",
+      "reference_correct": 116,
+      "lda_only_correct": 117,
+      "final_label_change_count": 4,
+      "candidate_list_change_count": 124,
+      "W2R": 2,
+      "R2W": 1,
+      "both_wrong_changed": 1,
+      "net_gain": 1
+    },
+    {
+      "split": "test",
+      "reference": "historical_lda_rf_equal",
+      "reference_correct": 119,
+      "lda_only_correct": 120,
+      "final_label_change_count": 8,
+      "candidate_list_change_count": 123,
+      "W2R": 4,
+      "R2W": 3,
+      "both_wrong_changed": 1,
+      "net_gain": 1
+    }
+  ],
+  "historical_configuration": {
+    "method": "LDA+RF(700) equal posterior + ACO",
+    "validation_correct": 116,
+    "formal_correct": 119,
+    "status": "superseded; retained for comparison"
+  }
+}

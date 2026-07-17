@@ -1,0 +1,133 @@
+{
+  "scope": "existing 32-position map; all accepted real packets pooled without train/val/test split",
+  "protocol": "source-packet-safe physical 5-second slots with per-file robust period fit",
+  "baseline": {
+    "existing_packet_count": 370,
+    "retained_source_safe_physical_starts": 364,
+    "legacy_unpaired_starts": 6,
+    "existing_files_left_unchanged": [
+      "fingerprint_localization/fingerprint_localization/data/mainline_202607/inputs/rssi_plus_packet_level_54points.csv",
+      "fingerprint_localization/fingerprint_localization/data/mainline_202607/external/subbin_spectrum_long.csv"
+    ]
+  },
+  "recovery": {
+    "expected_rssi_packets_on_32_position_map": 661,
+    "detected_candidates": 651,
+    "final_accepted_packets": 649,
+    "trusted_existing_physical_slots": 364,
+    "recovered_periodic_slots": 285,
+    "rejected_or_missing_packets": 12,
+    "growth_over_370": 279,
+    "growth_percent_over_370": 75.4054054054054
+  },
+  "qc_thresholds": {
+    "min_raw_power_db": -50.0,
+    "min_nonzero_fraction": 0.08,
+    "min_packet_score_db": -6.0
+  },
+  "rejection_reason_counts": {
+    "iq_window_out_of_range": 1,
+    "low_nonzero_fraction": 1,
+    "low_packet_score": 1,
+    "low_raw_power": 1,
+    "missing_detection": 10
+  },
+  "position_packet_counts": {
+    "0_33": 20,
+    "0_34": 20,
+    "0_35": 20,
+    "0_36": 20,
+    "0_37": 21,
+    "0_38": 21,
+    "0_39": 20,
+    "0_40": 20,
+    "0_42": 19,
+    "0_43": 20,
+    "0_44": 20,
+    "0_45": 20,
+    "0_48": 19,
+    "0_50": 19,
+    "1_16": 21,
+    "1_17": 20,
+    "1_18": 21,
+    "1_19": 21,
+    "1_20": 20,
+    "1_21": 19,
+    "1_22": 21,
+    "1_23": 21,
+    "1_24": 21,
+    "1_25": 21,
+    "1_26": 20,
+    "1_27": 20,
+    "1_28": 20,
+    "1_29": 20,
+    "1_30": 21,
+    "1_31": 21,
+    "1_32": 21,
+    "2_15": 21
+  },
+  "quality_distributions": {
+    "raw_power_db": {
+      "min": -48.12929262243777,
+      "p01": -44.67168549233814,
+      "p05": -43.92691028236115,
+      "median": -32.182398142209436,
+      "p95": -16.27395913722264,
+      "max": -7.845966375450696
+    },
+    "nonzero_fraction": {
+      "min": 0.1169891357421875,
+      "p01": 0.26068374633789065,
+      "p05": 0.32681121826171877,
+      "median": 0.8864784240722656,
+      "p95": 0.9794723510742187,
+      "max": 0.9935951232910156
+    },
+    "packet_score_db_mean": {
+      "min": -5.0298968223381895,
+      "p01": -2.2681166036458547,
+      "p05": 0.1360006744895538,
+      "median": 5.782121919707995,
+      "p95": 13.636258083526478,
+      "max": 14.842869048635805
+    },
+    "packet_score_db_std": {
+      "min": 0.22534759766753165,
+      "p01": 0.5092167776857772,
+      "p05": 0.8334536021345569,
+      "median": 1.7578450108513692,
+      "p95": 3.7171494181286846,
+      "max": 9.16400385577718
+    },
+    "detect_score_db": {
+      "min": -5.0748221828674325,
+      "p01": -1.4656916694395021,
+      "p05": -0.13508169276343374,
+      "median": 5.198958135958587,
+      "p95": 14.783836496080532,
+      "max": 16.039235270671803
+    },
+    "abs_sample_offset_from_model": {
+      "min": 0.0,
+      "p01": 0.0,
+      "p05": 0.0,
+      "median": 1088.0,
+      "p95": 10004.800000000005,
+      "max": 44432.0
+    }
+  },
+  "outputs": {
+    "rssi_rows": 649,
+    "packet_q_rows": 1298,
+    "spectrum_long_rows": 228448
+  },
+  "consistency_checks": {
+    "accepted_source_keys_unique": true,
+    "rssi_key_set_matches": true,
+    "packet_q_key_set_matches": true,
+    "packet_q_has_q1_q4_for_every_key": true,
+    "spectrum_key_set_matches": true,
+    "spectrum_rows_per_key_are_352": true,
+    "position_count_is_32": true
+  }
+}

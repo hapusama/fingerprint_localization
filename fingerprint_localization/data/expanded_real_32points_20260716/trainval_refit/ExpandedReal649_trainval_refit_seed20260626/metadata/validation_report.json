@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "source_counts": {
+    "train_refit": 521,
+    "test": 128
+  },
+  "source_overlap": 0,
+  "row_counts": {
+    "train": 5210,
+    "test": 128
+  },
+  "test_exact_match": {
+    "rssi": 128,
+    "s17": 128,
+    "spectrum": 128
+  },
+  "spectrum": {
+    "row_count": 1878976,
+    "packet_count": 5338,
+    "train_packet_count": 5210,
+    "test_packet_count": 128,
+    "rows_per_packet": 352,
+    "max_augmented_q1_q4_error": 0.0,
+    "max_mag_norm_identity_error": 2.2702395519047514e-12,
+    "max_real_identity_error": 9.949818746690653e-13,
+    "max_imag_identity_error": 9.992562333138721e-13,
+    "test_packets_exact": 128
+  },
+  "aco_loader_counts": {
+    "aligned": 5338,
+    "train": 5210,
+    "val": 0,
+    "test": 128,
+    "locations": 32
+  },
+  "aco_result": {
+    "correct": 98,
+    "packet_count": 128,
+    "accuracy": 0.765625
+  }
+}

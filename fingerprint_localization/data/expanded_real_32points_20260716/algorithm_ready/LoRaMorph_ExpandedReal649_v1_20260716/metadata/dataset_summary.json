@@ -1,0 +1,63 @@
+{
+  "dataset_version": "ExpandedReal-649-v1",
+  "created_date": "2026-07-16",
+  "protocol": "source-packet-safe physical 5-second slots; pooled unsplit dataset",
+  "sample_count": 649,
+  "position_count": 32,
+  "min_packets_per_position": 19,
+  "max_packets_per_position": 21,
+  "symbol_rows": 10384,
+  "array_shapes": {
+    "X_rssi": [
+      649,
+      6
+    ],
+    "X_rssi_s17": [
+      649,
+      27
+    ],
+    "X_pgar": [
+      649,
+      30
+    ],
+    "raw_symbol_mag": [
+      649,
+      16,
+      5
+    ],
+    "q4_symbol_db": [
+      649,
+      16,
+      17
+    ],
+    "q4_symbol_mag": [
+      649,
+      16,
+      17
+    ],
+    "y": [
+      649
+    ]
+  },
+  "q4_offsets": [
+    -2.0,
+    -1.75,
+    -1.5,
+    -1.25,
+    -1.0,
+    -0.75,
+    -0.5,
+    -0.25,
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+    2.0
+  ],
+  "split_status": "none",
+  "standardization_status": "unscaled; fit preprocessing on training sources only"
+}

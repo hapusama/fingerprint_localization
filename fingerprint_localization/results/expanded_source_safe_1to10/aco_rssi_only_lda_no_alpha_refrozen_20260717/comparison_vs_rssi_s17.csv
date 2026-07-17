@@ -1,0 +1,7 @@
+split,stage,reference_feature_set,new_feature_set,reference_correct,new_correct,accuracy_delta_pp,changed,W2R,R2W,net_gain,changed_both_wrong,mcnemar_exact_two_sided_p
+validation,lda,RSSI+S17,RSSI+ only,117,101,-12.5,22,2,18,-16,2,0.0004024505615234375
+validation,search,RSSI+S17,RSSI+ only,106,101,-3.90625,8,1,6,-5,1,0.125
+validation,final,RSSI+S17,RSSI+ only,119,105,-10.9375,18,1,15,-14,2,0.000518798828125
+formal_test,lda,RSSI+S17,RSSI+ only,120,112,-6.25,23,7,15,-8,1,0.13380050659179688
+formal_test,search,RSSI+S17,RSSI+ only,105,106,0.78125,4,2,1,1,1,1.0
+formal_test,final,RSSI+S17,RSSI+ only,120,115,-3.90625,15,5,10,-5,0,0.3017578125

@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "source_packet_counts": {
+    "train": 393,
+    "val": 128,
+    "test": 128
+  },
+  "augmented_row_counts": {
+    "train": 3930,
+    "test": 128,
+    "val": 128
+  },
+  "source_overlap": {
+    "train_val": 0,
+    "train_test": 0,
+    "val_test": 0
+  },
+  "evaluation_exact_match": {
+    "rssi_packets": 256,
+    "s17_packets": 256,
+    "spectrum_packets": 256
+  },
+  "spectrum": {
+    "row_count": 1473472,
+    "packet_count": 4186,
+    "rows_per_packet": 352,
+    "symbols_per_packet": 16,
+    "eval_packets_exact": 256,
+    "max_mag_norm_identity_error": 2.2646884367816256e-12,
+    "max_real_identity_error": 9.949818746690653e-13,
+    "max_imag_identity_error": 9.992562333138721e-13,
+    "max_q1_q4_integer_bin_error_all_rows": 3.4572070563075386,
+    "max_q1_q4_integer_bin_error_augmented_train": 0.0,
+    "q1_q4_note": "Evaluation originals preserve the parent dataset exactly; the q1/q4 equality constraint applies to augmented training copies."
+  },
+  "npz": {
+    "expected_shapes": {
+      "X_rssi": [
+        4186,
+        6
+      ],
+      "X_rssi_scaled": [
+        4186,
+        6
+      ],
+      "X_rssi_s17": [
+        4186,
+        27
+      ],
+      "X_rssi_s17_scaled": [
+        4186,
+        27
+      ],
+      "X_pgar": [
+        4186,
+        30
+      ],
+      "X_pgar_scaled": [
+        4186,
+        30
+      ],
+      "raw_symbol_mag": [
+        4186,
+        16,
+        5
+      ],
+      "q4_symbol_db": [
+        4186,
+        16,
+        17
+      ],
+      "q4_symbol_mag": [
+        4186,
+        16,
+        17
+      ]
+    },
+    "scalers": {
+      "X_rssi": {
+        "mean_max_abs_error": 0.0,
+        "std_max_abs_error": 0.0,
+        "scaled_max_abs_error": 0.0
+      },
+      "X_rssi_s17": {
+        "mean_max_abs_error": 0.0,
+        "std_max_abs_error": 0.0,
+        "scaled_max_abs_error": 0.0
+      },
+      "X_pgar": {
+        "mean_max_abs_error": 0.0,
+        "std_max_abs_error": 0.0,
+        "scaled_max_abs_error": 0.0
+      }
+    }
+  },
+  "native_loaders": {
+    "pgar_sample_count": 4186,
+    "pgar_q4_offset_count": 17,
+    "aco_rssi_packet_count": 4186,
+    "aco_symbol_packet_count": 4186,
+    "aco_segment_packet_count": 4186,
+    "aco_q4_offset_count": 17,
+    "aco_thresholds": {
+      "peak_threshold": 8.14064416521,
+      "q4_dev_threshold": 3.3589019651187204,
+      "q4_peak_offset_max": 0.5,
+      "q4_peak_to_side_threshold": 6.0
+    }
+  }
+}

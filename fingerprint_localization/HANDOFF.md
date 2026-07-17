@@ -1,62 +1,71 @@
 # INFOCOM 2027 实验交接
 
-## 当前主线
+更新日期：2026-07-17
 
-- 方法：ACO v4，`top_k=5`，`rssi_class_k=3`。
-- 协议：先按 source packet 划分；train 增强 1:10；validation/test 不增强。
-- validation 只用于选参；选参后合并 train+validation refit。
-- 最终 test：`67/74 = 90.54%`，test 与训练 source overlap 为 0。
+## 当前主线（唯一默认口径）
 
+当前 Expanded-649 主线是 `expanded_LDA_ACO_no_alpha`：
 
-## 获取数据
+- 数据：`ExpandedReal-649-v1`，32 个位置、649 个 QC 后真实 source packet。
+- 固定 source split：train/validation/test = `393/128/128`，seed `20260626`，source overlap 为 0。
+- 仅 train 做 1:10 增强：validation 阶段为 `3930/128/128` rows；正式 refit 阶段为 `5210/128` rows。
+- LDA：标准化 LDA(svd)，输入为 6 个 RSSI+ 特征和 21 个 S17/raw 特征，共 27 维。
+- 候选：直接取 LDA Top-5；已经删除 RSSI/LDA 的 alpha 候选融合。
+- ACO：4 segments、16 ants、12 iterations、Score4；RSSI 只保留为 ACO 观测代价和弱先验。
+- 最终融合：validation 在 `beta=0.0..1.0` 上重新选择并冻结 `beta=0.6`，之后才运行 formal test。
+- Validation：LDA `117/128`，完整 ACO 最终 `119/128 = 92.97%`。
+- Formal：LDA `120/128`，完整 ACO 最终 `120/128 = 93.75%`；LDA Top-5 recall `128/128`。
+- Formal test 在历史实验中已经被查看，因此当前 formal 数值必须标记为 exploratory。
 
-数据包使用 Git LFS。安装 Git LFS 后，在仓库根目录执行：
+权威入口：
 
-```bash
-git lfs pull --include="fingerprint_localization/data/mainline_202607/fingerloc-mainline-data-20260712.tar.gz"
-tar -xzf fingerprint_localization/data/mainline_202607/fingerloc-mainline-data-20260712.tar.gz \
-  --strip-components=1
-python3 -B fingerprint_localization/scripts/verify_handoff.py --hash
-```
+- 实验说明：`docs/mainline_202607/EXPANDED_LDA_ACO_NO_ALPHA_REFREEZE_20260717.md`
+- 冻结配置：`results/expanded_source_safe_1to10/aco_lda_only_no_alpha_refrozen_20260717/FROZEN_CONFIG.json`
+- 入口脚本：`experiments/aco_source_safe_1to10/run_no_alpha_validation_refreeze.py`
+- 结果目录：`results/expanded_source_safe_1to10/aco_lda_only_no_alpha_refrozen_20260717/`
+- 完整交接步骤：`docs/mainline_202607/EXPANDED_649_PARTNER_HANDOFF_20260717.md`
+- 与旧 370 主线对比：`docs/mainline_202607/EXPANDED649_VS_OLD370_MAINLINE_20260717.md`
 
-数据包 SHA-256：
+## 数据获取
 
-```text
-24cafc87f9cc99c24230b37a13d403aa880c8e099cc38bb0b3f4933b9375ac70
-```
+Expanded 数据以两个普通 Git 压缩包交付，不依赖旧的 `mainline_202607` LFS 包：
 
-## 继续实验
+1. `data/expanded_real_32points_20260716/algorithm_ready/LoRaMorph_ExpandedReal649_v1_20260716.tar.gz`
+   - 19 MiB；SHA-256：`21dac9b8ad448211de8faef5a3748cfc3896a4f50b025f2e9a0c00642e860210`
+   - 包含未划分的 649 个真实包、RSSI+/S17/q1-q4、ML 特征、NPZ、QC 和数据字典。
+2. `data/expanded_real_32points_20260716/source_safe_1to10/deliverables/ExpandedReal649_source_safe_1to10_seed20260626_partner_20260716.tar.gz`
+   - 77 MiB；SHA-256：`625723f2f0a1769554c25bb9187202c41e53d8acba147f6c8b46d2c72fffa81a`
+   - 包含固定 393/128/128 划分、train-only 1:10 增强、全部算法输入和验证报告。
 
-主线代码：`experiments/aco_source_safe_1to10/`。
+正式 5210/128 refit 数据不重复上传；它由上述两个包使用
+`experiments/aco_source_safe_1to10/build_expanded_trainval_refit.py` 确定性生成。
 
-实验：
+克隆后可在仓库根目录运行 `python3 fingerprint_localization/scripts/verify_expanded_handoff.py`，
+同时检查两个压缩包的大小/SHA-256、核心文件和冻结配置。
 
-1. 外部基线
--  KNN/probabilistic fingerprint； 
--  Random Forest / SVM / MLP； 
--  D-Trace RSSI+； 
--  OrchLoc； 
--  MC-LoRa。
-2. Solver 对比
-这是为了证明 ACO 不是随便选的：
--  exhaustive search small-scale； 
--  greedy segment selection； 
--  weighted voting； 
--  random search； 
--  ACO。
-3. 参数敏感性与可扩展性。段数（4/8/16 段实验）、候选池大小 Top-k、一致性阈值、蚂蚁数/迭代数对精度和时延的影响曲线
-4. 消融实验。
-5. 性能试验、包端到端时延与峰值内存、计算复杂度。
+## 已完成但不能误读的比较实验
 
-调参只运行 `train_loocv,val`；配置冻结后才运行 `test`。refit 数据中的
-73 条 `val` 已进入训练，只能作诊断，不能再作为独立 validation 成绩。
+- 候选召回/受控弱包：结果位于 `candidate_recall_and_controlled_weakness_20260716/`。它使用删除 alpha 之前的配置，适合作为诊断基线，不能直接冒充当前 no-alpha 主线结果。
+- 信息素/贪心/平均代价消融：结果位于 `search_mechanism_ablation_20260717/`，同样基于旧 alpha 配置。当前结果不能证明信息素机制不可替代。
+- 当前 no-alpha 的 clean 消融已经随主线一起输出：formal 的无信息素最终为 `121/128`，完整 ACO 为 `120/128`，差异不显著。
+- RSSI-only LDA：formal LDA/最终 ACO 为 `112/115`，低于 RSSI+S17 的 `120/120`。该结果说明 S17 主要改善 LDA Top-1 和 posterior 质量。
 
-## 目录
+## 搭档继续实验的优先级
 
-- `data/mainline_202607/`：可信输入、特征和 split 清单。
-- `model/v3/`：PGAR、ACO v2/v4 等模型实现。
-- `experiments/aco_source_safe_1to10/results/frozen/`：最终结果与逐包预测。
-- `experiments/zero_padding_fft/results/negative_controls/`：chirp-LoRa 直接匹配负结果。
-- `docs/mainline_202607/`：完整时间线、算法和数据清单。
+所有新比较必须先在 validation 冻结配置，formal 只能使用冻结配置一次性评估；不要用 formal 选择阈值、seed 或规则。
 
-不要使用 `v2_output_wrong`、旧的增强后切分结果或 `_fail` chirp 文件。
+1. 外部基线：KNN/probabilistic fingerprint、RF/SVM/MLP、D-Trace RSSI+、OrchLoc、MC-LoRa。
+2. Solver：small-scale exhaustive search、greedy segment selection、weighted voting、random search、无信息素、完整 ACO。
+3. 可扩展性：segment 数 4/8/16、Top-k、阈值、ants/iterations 的 accuracy-latency 曲线。
+4. 当前 no-alpha 协议下重跑候选召回、弱包扰动和完整机制消融；旧 alpha 结果仅作对照。
+5. 原始 IQ 层面的前导码缺失、幅度噪声、CFO/频移和单 segment 异常；现有 feature-space 扰动不能替代该实验。
+6. 多 seed/多 split 或新增盲测包，报告 paired bootstrap/置信区间；否则不能强化“ACO 不可替代”结论。
+7. 端到端时延、峰值内存和计算复杂度；统一注明是否包含特征提取、模型加载和模板构建。
+
+## 禁止事项
+
+- 不得重新随机划分 649 个 source packet。
+- 不得在 validation/test 上拟合 scaler、增强统计、模板、阈值或候选规则。
+- 不得把 3930/5210 个增强 rows 当作独立真实包样本量。
+- 不得把旧 370 的 `67/74` 与 Expanded 的 `120/128` 当成同 test set 的直接提升。
+- 不得再使用 `_fail` chirp 文件、`v2_output_wrong` 或增强后才切分的旧结果。

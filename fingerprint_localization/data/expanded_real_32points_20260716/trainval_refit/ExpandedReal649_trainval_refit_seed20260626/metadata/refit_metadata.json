@@ -1,0 +1,21 @@
+{
+  "version": "ExpandedReal-649-v1-source-safe-trainval-refit-v1",
+  "parent_split_version": "ExpandedReal-649-v1-source-safe-1to10-v1",
+  "seed": 20260626,
+  "protocol": "After the frozen mainline configuration is selected, original train and validation sources form the refit training set. Existing train augmentations are reused; former validation sources receive 10 augmentations using statistics estimated from the original 393 train sources only. Test sources remain untouched originals.",
+  "source_counts": {
+    "train_refit": 521,
+    "test": 128
+  },
+  "packet_row_counts": {
+    "train": 5210,
+    "test": 128
+  },
+  "spectrum_row_count": 1878976,
+  "test_source_overlap_with_refit_train": 0,
+  "former_validation_source_count": 128,
+  "former_validation_augmented_rows": 1280,
+  "noise_statistics_source_count": 393,
+  "noise_statistics_include_former_validation": false,
+  "test_augmentation": false
+}

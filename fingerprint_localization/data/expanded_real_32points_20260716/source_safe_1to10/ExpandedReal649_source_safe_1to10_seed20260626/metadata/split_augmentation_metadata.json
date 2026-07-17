@@ -1,0 +1,247 @@
+{
+  "dataset_version": "ExpandedReal-649-v1",
+  "derived_version": "ExpandedReal-649-v1-source-safe-1to10-v1",
+  "seed": 20260626,
+  "protocol": "Stratified source-packet-safe 60/20/20 split. Only training sources are represented by 10 Gaussian-perturbed copies; validation and test are untouched original packets.",
+  "source_packet_counts": {
+    "train": 393,
+    "val": 128,
+    "test": 128
+  },
+  "augmented_row_counts": {
+    "train": 3930,
+    "test": 128,
+    "val": 128
+  },
+  "total_packet_rows": 4186,
+  "spectrum_rows": 1473472,
+  "location_counts": {
+    "train": 32,
+    "val": 32,
+    "test": 32
+  },
+  "source_overlap": {
+    "train_val": 0,
+    "train_test": 0,
+    "val_test": 0
+  },
+  "augmentation": {
+    "factor": 10,
+    "noise_ratio": 10.0,
+    "rssi_and_s17": "Independent Gaussian feature noise with sigma=train-column-std/noise_ratio; statistics use training sources only.",
+    "spectrum": "Smooth Gaussian perturbation in q4 dB shape using training-only sigma, with peak-gain jitter. q1 integer bins are tied to q4; magnitude, normalized magnitude, dB, real, and imaginary fields are recomputed consistently.",
+    "train_original_in_augmented_pool": false,
+    "note": "The original 393 training source packets remain recoverable from the parent ExpandedReal-649-v1 package."
+  },
+  "noise_stats": {
+    "rssi": {
+      "snr": {
+        "train_mean": 8.045801526717558,
+        "train_std": 2.132491627360125,
+        "noise_std": 0.21324916273601252,
+        "noise_ratio": 10.0
+      },
+      "realtime_average_rssi": {
+        "train_mean": -82.70430529952196,
+        "train_std": 12.237630827696128,
+        "noise_std": 1.2237630827696129,
+        "noise_ratio": 10.0
+      },
+      "median_rssi": {
+        "train_mean": -82.57394637060824,
+        "train_std": 12.23611197851451,
+        "noise_std": 1.223611197851451,
+        "noise_ratio": 10.0
+      },
+      "mode_rssi": {
+        "train_mean": -82.55979643765903,
+        "train_std": 12.243588422718378,
+        "noise_std": 1.2243588422718379,
+        "noise_ratio": 10.0
+      },
+      "rssi_variance": {
+        "train_mean": 0.7508308467205865,
+        "train_std": 0.6272483368092507,
+        "noise_std": 0.06272483368092507,
+        "noise_ratio": 10.0
+      },
+      "residual": {
+        "train_mean": 0.8299884715575089,
+        "train_std": 5.142657107725248,
+        "noise_std": 0.5142657107725248,
+        "noise_ratio": 10.0
+      }
+    },
+    "s17": {
+      "preamble_fft_mag_bin_-8": {
+        "train_mean": 2.3870203158346244,
+        "train_std": 3.327532041722786,
+        "noise_std": 0.3327532041722786,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-7": {
+        "train_mean": 2.4770171271867443,
+        "train_std": 3.7030238561096973,
+        "noise_std": 0.37030238561096973,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-6": {
+        "train_mean": 3.1933788121457725,
+        "train_std": 4.877948718896895,
+        "noise_std": 0.4877948718896895,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-5": {
+        "train_mean": 3.00697217263941,
+        "train_std": 4.6419137868287805,
+        "noise_std": 0.4641913786828781,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-4": {
+        "train_mean": 4.804938576313593,
+        "train_std": 7.991022334605687,
+        "noise_std": 0.7991022334605687,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-3": {
+        "train_mean": 4.545540651598401,
+        "train_std": 7.068888903568398,
+        "noise_std": 0.7068888903568398,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-2": {
+        "train_mean": 9.819681227664253,
+        "train_std": 16.68935203607677,
+        "noise_std": 1.668935203607677,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_-1": {
+        "train_mean": 18.08889553439115,
+        "train_std": 31.06656152880206,
+        "noise_std": 3.106656152880206,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+0": {
+        "train_mean": 85.15491361765251,
+        "train_std": 119.54892286654606,
+        "noise_std": 11.954892286654607,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+1": {
+        "train_mean": 15.303035207323758,
+        "train_std": 23.20697384310427,
+        "noise_std": 2.320697384310427,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+2": {
+        "train_mean": 10.946301439355318,
+        "train_std": 26.01176235965134,
+        "noise_std": 2.601176235965134,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+3": {
+        "train_mean": 4.370065450219947,
+        "train_std": 6.48652357965838,
+        "noise_std": 0.648652357965838,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+4": {
+        "train_mean": 4.760080778035862,
+        "train_std": 9.982370969704878,
+        "noise_std": 0.9982370969704878,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+5": {
+        "train_mean": 2.8314486704359276,
+        "train_std": 4.428674780242097,
+        "noise_std": 0.44286747802420967,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+6": {
+        "train_mean": 2.9765812207084696,
+        "train_std": 5.779096136085734,
+        "noise_std": 0.5779096136085734,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+7": {
+        "train_mean": 2.1817177116776607,
+        "train_std": 3.6153758559100915,
+        "noise_std": 0.3615375855910091,
+        "noise_ratio": 10.0
+      },
+      "preamble_fft_mag_bin_+8": {
+        "train_mean": 2.082862633226414,
+        "train_std": 3.779486542277208,
+        "noise_std": 0.3779486542277208,
+        "noise_ratio": 10.0
+      },
+      "preamble_peak_to_residual_db": {
+        "train_mean": 6.387077389841198,
+        "train_std": 4.350888889619697,
+        "noise_std": 0.43508888896196973,
+        "noise_ratio": 10.0
+      },
+      "detect_score_db": {
+        "train_mean": 5.752479062529018,
+        "train_std": 4.32332862924627,
+        "noise_std": 0.432332862924627,
+        "noise_ratio": 10.0
+      },
+      "s17_c_s": {
+        "train_mean": 0.8359566410322596,
+        "train_std": 0.12404307150013673,
+        "noise_std": 0.012404307150013673,
+        "noise_ratio": 10.0
+      },
+      "s17_j_s": {
+        "train_mean": 0.056979350403636164,
+        "train_std": 0.06538719129936019,
+        "noise_std": 0.006538719129936019,
+        "noise_ratio": 10.0
+      }
+    },
+    "spectrum": {
+      "train_packet_count": 393,
+      "q4_shape_db_train_mean": -12.810425575945013,
+      "q4_shape_db_train_std": 9.738060190992734,
+      "q4_shape_noise_std_db": 0.9738060190992733,
+      "q4_peak_db_train_mean": 32.56755113231938,
+      "q4_peak_db_train_std": 10.860924361974988,
+      "q4_peak_gain_noise_std_db": 1.0860924361974988,
+      "noise_ratio": 10.0
+    }
+  },
+  "arrays": {
+    "row_count": 4186,
+    "array_shapes": {
+      "X_rssi": [
+        4186,
+        6
+      ],
+      "X_rssi_s17": [
+        4186,
+        27
+      ],
+      "X_pgar": [
+        4186,
+        30
+      ],
+      "raw_symbol_mag": [
+        4186,
+        16,
+        5
+      ],
+      "q4_symbol_db": [
+        4186,
+        16,
+        17
+      ]
+    },
+    "split_row_counts": {
+      "train": 3930,
+      "val": 128,
+      "test": 128
+    },
+    "label_count": 32
+  }
+}

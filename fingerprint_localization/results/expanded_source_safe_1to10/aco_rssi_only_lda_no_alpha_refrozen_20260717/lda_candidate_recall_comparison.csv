@@ -1,0 +1,5 @@
+split,lda_feature_set,packets,lda_top1_recall_count,lda_top1_recall,lda_top3_recall_count,lda_top3_recall,lda_top5_recall_count,lda_top5_recall,candidate_truncation_errors
+validation,RSSI+S17,128,117,0.9140625,126,0.984375,128,1.0,0
+validation,RSSI+ only,128,101,0.7890625,127,0.9921875,127,0.9921875,1
+formal_test,RSSI+S17,128,120,0.9375,128,1.0,128,1.0,0
+formal_test,RSSI+ only,128,112,0.875,128,1.0,128,1.0,0

@@ -4,6 +4,10 @@
 2026-06-23 之后的论文主线是 source-safe、chirp-assisted ACO v4；硬件链路是其
 离线 chirp 数据来源，不是在线定位输入。
 
+2026-07-17 起，当前实验默认使用 `ExpandedReal-649-v1`（32 个位置、649 个真实
+source packet）及 `expanded_LDA_ACO_no_alpha`。交接入口见
+`fingerprint_localization/HANDOFF.md`；旧 370 数据和 `67/74` 仅作历史对照。
+
 ## 论文实验主线（先读）
 
 - 搭档交接入口：`fingerprint_localization/HANDOFF.md`
